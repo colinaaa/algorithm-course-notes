@@ -1,10 +1,9 @@
 # Welcome to algorithm-course-notes 👋
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+![build-CI](https://github.com/colinaaa/algorithm-course-notes/workflows/build-CI/badge.svg)
 
 > 算法课笔记
-
-### ✨ [Demo](https://alg.outsiders.top)
 
 ## 添加新章节
 

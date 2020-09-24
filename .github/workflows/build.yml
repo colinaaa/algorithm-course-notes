@@ -29,5 +29,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: book-output
-          path: ./book.pdf
+          path: ./tmp/book.pdf
           if-no-files-found: ignore
