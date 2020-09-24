@@ -20,7 +20,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: |
+            ./tmp/
+          key: ${{ runner.os }}-${{ hashFiles('**/*.tex') }}-${{ hashFiles('**/*.bib') }}
+
       - name: Compile LaTeX document
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: xu-cheng/latex-action@v2
         with:
           root_file: book.tex

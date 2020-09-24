@@ -2,8 +2,11 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 ![build-CI](https://github.com/colinaaa/algorithm-course-notes/workflows/build-CI/badge.svg)
+![Upload Release Asset](https://github.com/colinaaa/algorithm-course-notes/workflows/Upload%20Release%20Asset/badge.svg)
 
 > 算法课笔记
+
+### ✨ [Demo](https://github.com/colinaaa/algorithm-course-notes/releases/download/v1.0.0/book.pdf)
 
 ## 添加新章节
 
