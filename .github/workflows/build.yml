@@ -29,6 +29,7 @@ jobs:
 
       - name: LaTeX linter (chktex)
         uses: j2kun/chktex-action@v1.0.2
+        continue-on-error: true
 
       - name: Compile LaTeX document
         if: steps.cache.outputs.cache-hit != 'true'
