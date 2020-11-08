@@ -63,13 +63,13 @@
 \end{definition}
 
 \begin{definition}{T(A)}{label-for-this-def}
-  A \subseteq Vl,T(A) = \{b \in Vr | (a,b) \in E \}。
+    \(A \subseteq Vl,T(A) = \{b \in Vr | (a,b) \in E \}\)。
 \end{definition}
 
-对于一个二分图来说，如果|Vl|=|Vr|=n,并且存在完美匹配，那么任取集合A \subseteq Vl,|T(A)| \ge |A|。
+对于一个二分图来说，如果|Vl|=|Vr|=n,并且存在完美匹配，那么任取集合\(A \subseteq Vl,|T(A)| \ge |A|\)。
 
 \begin{theorem}{霍尔定理}{label-for-this-theorem}
-  任取A\subseteqVl，若|T(A)| >= |A|,则存在完美匹配。
+    任取\(A\subseteq Vl，若|T(A)| \geq |A|\),则存在完美匹配。
 \end{theorem}
 证明霍尔定理的正确性(证明其逆否命题正确)：
 \begin{itemize}
@@ -93,7 +93,7 @@
 
 求得最大流f=n，则表示该棋盘可以用骨牌填满。
 
-算法复杂度分析：F-F算法复杂度为O(mC)，在这个模型中，m=n，C<=4n,所以用网络流解决棋盘问题的算法时间复杂度为O(n^2)。
+算法复杂度分析：F-F算法复杂度为O(mC)，在这个模型中，m=n，C<=4n,所以用网络流解决棋盘问题的算法时间复杂度为\(O(n^2)\)。
 
 \section{棒球比赛}
 问题描述：有四个棒球队比赛，目前赛场上的得分情况及剩余的场次如下图，问B队有没有机会赢得比赛（并列第一也算赢）？
@@ -140,7 +140,6 @@
 
 \begin{equation}
 v = (p_{B+}) - (p_{B-}) = (p_+) - (p_{A+}) - (p_{B-}) = (p_+) - [(p_{A+}) + (p_{B-})] = (p_+) - cut
-
 \end{equation}
-所以所得价值为一常数减去割，要求maxv，则割要为mincut，即maxv = (p_+) -mincut
+所以所得价值为一常数减去割，要求maxv，则割要为mincut，即\(maxv = (p_+) -mincut\)
 
