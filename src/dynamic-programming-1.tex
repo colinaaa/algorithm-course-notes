@@ -10,17 +10,17 @@
 简要比较一下几种算法策略的不同。
 
 \begin{itemize}
-  \item 贪心法 - 基于贪心策略，每次总是选取眼前最优的选项，同时期待最终的结果最优。
+  \item 贪心法 -基于贪心策略，每次总是选取眼前最优的选项，同时期待最终的结果最优。
         优点在于思考和模型建立较为简单，难点在于如何证明算法的正确性。
-  \item 分治法 - 分而治之，子问题不存在重叠。
+  \item 分治法 -分而治之，子问题不存在重叠。
         难点在于如何分割问题，以及如何合并解。
-  \item 动态规划 - 思想类似于分治，与贪心法相反，子问题之间存在重叠，算法执行过程中记录子问题的解。
+  \item 动态规划 -思想类似于分治，与贪心法相反，子问题之间存在重叠，算法执行过程中记录子问题的解。
         难点在于如何找到转移方程。
 \end{itemize}
 
-本章将介绍动态规划在带权区间调度 \ref{sec:weighted-interval-scheduling} 、矩阵链乘法 \ref{sec:matrix-chain-multiplication} 两个问题上的应用。
+本章将介绍动态规划在带权区间调度~\ref{sec:weighted-interval-scheduling} 、矩阵链乘法~\ref{sec:matrix-chain-multiplication} 两个问题上的应用。
 
-\section{带权区间调度} \label{sec:weighted-interval-scheduling}
+\section{带权区间调度}\label{sec:weighted-interval-scheduling}
 
 \subsection{问题描述}
 
@@ -34,17 +34,16 @@
     \draw[|-|] (8, 1) -- node [above] {$w_5=2$} (10, 1);
     \draw[|-|] (9.5, 0) -- node [above] {$w_6=1$} (10.5, 0);
   \end{tikzpicture}
-  \caption{区间调度示例}
-  \label{fig:wis-picture-1}
+  \caption{区间调度示例}\label{fig:wis-picture-1}
 \end{figure}
 
 下面给出带权区间调度问题的定义。
 
 \begin{definition}{带权区间调度问题}{def:weighted-interval-scheduling}
-  给定区间$I_1, I_2, ..., I_n$，
+  给定区间$I_1, I_2, \ldots, I_n$，
   $s_i$为$I_i$开始时间，$f_i$为$I_i$的结束时间（$f_i>s_i$），$w_i>0$, 假设$\forall i < j$，$ s_i<s_j$。
   \begin{itemize}
-    \item $OPT(k)$：表示区间集合$\{ I_1, I_2, ... , I_i \}$上的最优解权值。
+    \item $OPT(k)$：表示区间集合$\{ I_1, I_2, \ldots , I_i \}$上的最优解权值。
     \item $P(i)$：表示$I_i$的前驱，当$P(i)=j$时，有$f_j=\max\limits_{1 \leq k < i}\{f_k | f_k < s_i\}$，当$I_i$没有前驱时，$P(i)=0$
   \end{itemize}
   目标：寻找一个$\sum w_i$最大的区间子集$R$，满足$\forall I_m,I_n \in R, m < n \text{都有} f_m < s_n$。
@@ -66,8 +65,7 @@
       \draw[|-|] (0, 0) -- node [above] {\scriptsize 2} (1, 0);
       \draw[|-|] (0.5 , -0.5) -- node [above] {\scriptsize 100} (1.5, -0.5);
     \end{tikzpicture}
-    \caption{}
-    \label{fig:wis-counterexample1}
+    \caption{}\label{fig:wis-counterexample1}
   \end{subfigure}
   \begin{subfigure}{.3\textwidth}
     \centering
@@ -76,8 +74,7 @@
       \draw[|-|] (1.2, 0) -- node [above] {\scriptsize 999} (2.2, 0);
       \draw[|-|] (0.7 , -0.5) -- node [above] {\scriptsize 100} (1.7, -0.5);
     \end{tikzpicture}
-    \caption{}
-    \label{fig:wis-counterexample2}
+    \caption{}\label{fig:wis-counterexample2}
   \end{subfigure}
   \begin{subfigure}{.3\textwidth}
     \centering
@@ -86,11 +83,9 @@
       \draw[|-|] (1.2, 0) -- node [above] {\scriptsize 3} (2.2, 0);
       \draw[|-|] (0.7 , -0.5) -- node [above] {\scriptsize 6} (1.7, -0.5);
     \end{tikzpicture}
-    \caption{}
-    \label{fig:wis-counterexample3}
+    \caption{}\label{fig:wis-counterexample3}
   \end{subfigure}
-  \caption{贪心反例}
-  \label{fig:wis-counterexample}
+  \caption{贪心反例}\label{fig:wis-counterexample}
 \end{figure}
 
 \begin{enumerate}
@@ -124,7 +119,7 @@
 \par
 因为需要找到最大的权值，上式也可以写成
 \begin{equation}
-  OPT(n)=\max\{w_n+OPT(P(n)),OPT(n-1)\}
+  OPT(n)=\max \{w_n+OPT(P(n)),OPT(n-1)\}
 \end{equation}
 
 \subsubsection{算法分析}
@@ -135,7 +130,7 @@
 \paragraph*{空间复杂度}
 算法执行过程中，会开辟一个空间记录子问题最优解，即空间复杂度为$O(n)$。
 
-\section{矩阵链乘法} \label{sec:matrix-chain-multiplication}
+\section{矩阵链乘法}\label{sec:matrix-chain-multiplication}
 
 \subsection{问题描述}
 假设有矩阵乘法$A \cdot B \cdot C$。其中$A = (n \times m), B = (m \times n), C = (n \times m)$。
@@ -145,7 +140,7 @@
 \par
 下面给出矩阵链乘法问题的相关定义。
 \begin{definition}{矩阵链乘法问题}{def:matrix-chain-multiplication}
-  给定n个矩阵的链$<A_1,A_2,\cdots,A_n>$矩阵$A_i$的规模为$p_{i-1} \times p_i, (1 \leq i \leq n)$。
+  给定n个矩阵的链$<A_1,A_2,\ldots,A_n>$矩阵$A_i$的规模为$p_{i-1} \times p_i, (1 \leq i \leq n)$。
   求完全括号化方案，使得计算矩阵乘积$A_1 \cdot A_2 \cdot A_3 \cdots A_n$所需的标量乘法次数最少。
   \begin{itemize}
     \item $C(i,j,k)$：记$\underbrace{(A_i \cdot A_{i+1} \cdots A_j)}_{p \times q}  \cdot \underbrace{(A_{j+1} \cdot A_{j+2} \cdots A_k)}_{q \times r}$相乘的代价为$C(i,j,k)=pqr$。
@@ -169,18 +164,18 @@
 
 \begin{algorithm}
   \caption{MATRIX-CHAIN-ORDER}\label{alg:mco}
-  \KwIn{序列$p=<p_0,p_1,\cdots,p_n>$，长度为$n+1$，$p_{i-1} \times p_i$为第$i$个矩阵的规模}
+  \KwIn{序列$p=<p_0,p_1,\ldots,p_n>$，长度为$n+1$，$p_{i-1} \times p_i$为第$i$个矩阵的规模}
   \KwOut{代价表$OPT[1..n, 1..n]$，分割表$s[1..n-1, 2..n]$记录$OPT(i,j)$的分割点$k$}
-  \BlankLine
+  \BlankLine{}
   $n = p.length-1$\;
   $\text{let } OPT[1..n, 1..n] \text{ and } s[1..n-1, 2..n] \text{ be new tables}$\;
-  \For{$i = 1$ \KwTo $n$}{$OPT[i,i]=0$\;}
-  \For{$l = 2$ \KwTo $n$}{
-  \For{$i = 1$ \KwTo $n-l+1$}{
+  \For{$i = 1$ \KwTo$n$}{$OPT[i,i]=0$\;}
+  \For{$l = 2$ \KwTo$n$}{
+  \For{$i = 1$ \KwTo$n-l+1$}{
   $j = i+l-1$\;
   $OPT[i,j] = \infty$\;
-  \For{$k = i$ \KwTo $j-1$}{
-  $q = OPT[i,k]+OPT[k+1,j]+p_{i-1}p_kp_j$\;
+  \For{$k = i$ \KwTo$j-1$}{
+  $q = OPT[i,k]+OPT[k+1,j]+p_{i-1} p_k p_j$\;
   \If{$q < OPT[i,j]$}{
     $OPT[i,j] = q$\;
     $s[i,j] = k$\;
