@@ -1,5 +1,9 @@
 \documentclass[cn]{elegantbook}
 
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[ruled,linesnumbered]{algorithm2e}
 \usepackage{hyperref}
 
 \def\figureautorefname{图}
@@ -14,14 +18,14 @@
 \cover{cover.png}
 
 \begin{document}
-  \maketitle
-  \tableofcontents
+\maketitle
+\tableofcontents
+\pagenumbering{arabic}
 
-  \pagenumbering{arabic}
+% add your code here
+\input{src/example.tex}
+\input{src/dynamic-programming-1.tex}
+\input{src/Network-flows.tex}
 
-  % add your code here
-  \input{src/example.tex}
-  \input{src/Network-flows.tex}
-
-  \bibliography{ref.bib}
+\bibliography{ref.bib}
 \end{document}
