@@ -169,7 +169,7 @@
 
 \begin{algorithm}
   \caption{MATRIX-CHAIN-ORDER}\label{alg:mco}
-  \KwIn{矩阵链序列$p=<p_1,p_2,\cdots,p_n>$}
+  \KwIn{序列$p=<p_0,p_1,\cdots,p_n>$，长度为$n+1$，$p_{i-1} \times p_i$为第$i$个矩阵的规模}
   \KwOut{代价表$OPT[1..n, 1..n]$，分割表$s[1..n-1, 2..n]$记录$OPT(i,j)$的分割点$k$}
   \BlankLine
   $n = p.length-1$\;
