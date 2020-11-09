@@ -3,7 +3,8 @@ SRC=src
 TEX=\
 	$(SRC)/example.tex\
 	$(SRC)/dynamic-programming-1.tex\
-
+	$(SRC)/Network-flows.tex\
+	
 all: book.pdf
 .PHONY: all clean dev clean-all
 
