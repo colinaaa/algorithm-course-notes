@@ -2,7 +2,8 @@ SRC=src
 
 TEX=\
 	$(SRC)/example.tex\
-
+	$(SRC)/Network-flows.tex\
+	
 all: book.pdf
 .PHONY: all clean dev clean-all
 
