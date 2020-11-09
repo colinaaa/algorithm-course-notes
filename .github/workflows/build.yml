@@ -27,8 +27,8 @@ jobs:
             ./tmp/
           key: ${{ runner.os }}-${{ hashFiles('**/*.tex') }}-${{ hashFiles('**/*.bib') }}
 
-      - name: LaTeX linter (chktex)
-        uses: j2kun/chktex-action@v1.0.2
+      - name: LaTeX linter
+        uses: colinaaa/chktex-action@v1
         continue-on-error: true
 
       - name: Compile LaTeX document
