@@ -1,5 +1,13 @@
 \documentclass[cn]{elegantbook}
 
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{hyperref}
+
+\def\figureautorefname{图}
+
 \title{何老师算法课笔记}
 \subtitle{还没有想好的副标题}
 \author{计卓1801全体}
@@ -10,11 +18,12 @@
 \cover{cover.png}
 
 \begin{document}
-  \maketitle
-  \tableofcontents
+\maketitle
+\tableofcontents
 
-  % add your code here
-  \input{src/example.tex}
+% add your code here
+\input{src/example.tex}
+\input{src/dynamic-programming-1.tex}
 
-  \bibliography{ref.bib}
+\bibliography{ref.bib}
 \end{document}
