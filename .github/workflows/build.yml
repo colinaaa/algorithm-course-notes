@@ -28,7 +28,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/*.tex') }}-${{ hashFiles('**/*.bib') }}
 
       - name: LaTeX linter
-        uses: colinaaa/chktex-action@v1.1.0
+        uses: colinaaa/chktex-action@v1.1.1
         continue-on-error: true
 
       - name: Compile LaTeX document
