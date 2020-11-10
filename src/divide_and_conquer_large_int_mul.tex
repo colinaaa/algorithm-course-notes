@@ -1,0 +1,164 @@
+\chapter{分治法之大数乘法}
+\begin{introduction}
+    \item 问题背景
+    \item 直接分治法
+    \item 改进分治法
+\end{introduction}
+
+\section{问题描述}
+给定两个大数$A$和$B$, 试计算
+\begin{math}
+    A \times B
+\end{math}.
+其中$A$和$B$分别表示为
+\begin{math}
+    A = a_n a_{n-1} a_{n-2} \ldots a_2 a_1
+\end{math}
+,
+\begin{math}
+    B = b_n b_{n-1} b_{n-2} \ldots b_2 b_1
+\end{math}.
+根据已学知识，给出如下引理。
+
+\begin{lemma}{}{label_for_a+b}
+    直接计算$A + B$，其复杂度为$O(n)$, 其中$n$为$A$和$B$的十进制位数。
+\end{lemma}
+
+直接计算$A \times B$时，我们将$A$与$B$的各位相乘，在将各中间结果相加，得到最终结果。
+不难得出，这一过程需要进行$n$次基本乘法与$n+1$次加法。
+根据引理\ref{lem:label_for_a+b}，有：
+\begin{theorem}{}{label_for_a*b}
+    直接计算$A \times B$的时间复杂度为$O(n^2)$.
+\end{theorem}
+
+由定理\ref{thm:label_for_a*b}和引理\ref{lem:label_for_a+b}可知，如果我们直接相乘两个大数，其时间复杂度相比加法运算高出一个量级。
+由于乘法在计算机中大量存在，我们希望找到更好的算法来降低乘法计算的时间复杂度，以提升计算机的性能。
+分治法为我们提供了一条途径。
+\section{直接分治法}
+\subsection{算法描述}
+这是一种简单的分治方法，将两个大数分为前后两部分，进行相乘。不失一般性，这里假设$n$为偶数。
+将$A$与$B$分割为$A_2$, $A_1$, $B_2$, $B_1$,即：
+\begin{displaymath}
+    \begin{split}
+        A_2 &= a_{n} a_{n-1} \ldots a_{\frac{n}{2} + 2} a_{\frac{n}{2} + 1}\\
+        A_1 &= a_{\frac{n}{2}} a_{\frac{n}{2} - 1} \ldots a_2 a_1\\
+        B_2 &= b_{n} b_{n-1} \ldots b_{\frac{n}{2} + 2} b_{\frac{n}{2} + 1}\\
+        B_1 &= b_{\frac{n}{2}} b_{\frac{n}{2} - 1} \ldots b_2 b_1
+    \end{split}
+\end{displaymath}
+
+则$A$可以写为$A = A_2 \times 2^{\frac{n}{2}} + A_1$.
+$B$可以写为$B = B_2 \times 2^{\frac{n}{2}} + B_1$.
+计算$A \times B$的问题在进行上述转换后表示为：
+\begin{displaymath}
+    \begin{split}
+        A \times B
+        & = (A_2 \times 2^{\frac{n}{2}} + A_1) \times (B_2 \times 2^{\frac{n}{2}} + B_1) \\
+        & = A_2 B_2 \times 2^n + (A_2 B_1 + A_1 B_2) \times 2^{\frac{n}{2}} + A_1 B_1
+    \end{split}
+\end{displaymath}
+
+此时将两个大数相乘的问题转化为4个乘法子问题和3个加法子问题。显然，分治策略还可以对子问题使用，继续减小问题的规模。
+
+\subsection{伪代码}
+\begin{algorithm}
+    \DontPrintSemicolon{}
+    \KwIn{Two large numbers $A$, $B$, which both have $n$ decimal digits}
+    \KwResult{$A \times B$}
+    \Begin{
+        $n \leftarrow $ Number of Decimal Digits of $A$ and $B$\;
+        \If{$n \neq 1$}{
+            Divide $A$, $B$ into $A_2$, $A_1$, $B_2$ and $B_1$\;
+            $C_3 \leftarrow DirectDAC(A_2, B_2)$\;
+            $C_2 \leftarrow DirectDAC(A_2, B_1)$\;
+            $C_1 \leftarrow DirectDAC(A_1, B_2)$\;
+            $C_0 \leftarrow DirectDAC(A_1, B_1)$\;
+            \KwRet{$C_3 \ll n + (C_2 + C_1) \ll (n - 1) + C_0$}\;
+        }
+        \Else{
+            \KwRet{$A \times B$}
+        }
+    }
+    \caption{DirectDAC\label{label_for_pseudo_DirectDAC}}
+\end{algorithm}
+
+\subsection{复杂度分析}
+由上述的算法描述可知，算法的主要开销来自于每次分支带来的4个乘法子问题和3个加法子问题，由于移位可在机器中由一个简单的指令完成，我们忽略这个操作的时间。\\
+假设$T(n)$表示两个$n$位大数相乘所需的时间开销，则在直接分治法中：
+\begin{displaymath}
+    \begin{split}
+        T(n)
+        &= 4T(\frac{n}{2}) + 3n \\
+        &= 4T(\frac{n}{2}) + O(n)
+    \end{split}
+\end{displaymath}
+
+根据主方法，$\log_2 4  = 2> 1$, 推出如下定理：
+\begin{theorem}{}{label_for_DirectDAC_complexity}
+    用直接分治法计算$A \times B$的时间复杂度为$O(n^2)$.
+\end{theorem}
+
+根据定理\ref{thm:label_for_DirectDAC_complexity},直接分治法的性能是令人失望的，因为其并不能提供时间上优于直接相乘的性能。
+但分治策略提示我们，这个算法的性能与乘法子问题的数目强相关。我们如果能够用一些其他的开销换取更少的乘法子问题数目，也许能得到更好的算法。
+
+
+\newpage
+\section{改进分治法}
+\subsection{改进思路}
+在直接分治法中，通过对大数进行分割，我们有：
+\begin{displaymath}
+    A \times B = A_2 B_2 \times 2^n + (A_2 B_1 + A_1 B_2) \times 2^{\frac{n}{2}} + A_1 B_1
+\end{displaymath}
+
+这个过程中，引入了4次乘法运算；在上一节中提到，分治策略和主定理提示我们尽可能减少乘法的次数。
+但换取更低的乘法子问题数，需要其他的开销。
+一种想法是，由于加法的复杂度为$O(n)$，我们也许可以用略多的加法子问题，来减少乘法子问题数。
+基于此想法，我们对直接分治法作出一些改进。首先将直接分治法中的计算式修改为：
+\begin{displaymath}
+    \begin{split}
+        A \times B
+        &= A_2 B_2 \times 2^n + (A_2 B_1 + A_1 B_2) \times 2^{\frac{n}{2}} + A_1 B_1\\
+        &= A_2 B_2 \times 2^n + ((A_2 + A_1)\times(B_2 + B_1) - A_2 B_2 - (A_1 B_1)) \times 2^{\frac{n}{2}} + A_1 B_1
+    \end{split}
+\end{displaymath}
+
+观察上式，我们只需要做3次乘法，即计算$A_2 B_2$, $A_1 B_1$, $(A_2 + A_1)\times(B_2 + B_1)$, 以及4次加法，2次减法。
+考虑到加法和减法本质上等同，我们成功地将这一问题转化为了3个乘法子问题和6个加法子问题。相比于直接分治法，我们降低了乘法的数量。
+
+下面给出该算法的伪代码及复杂度分析。
+\subsection{伪代码}
+\begin{algorithm}
+    \DontPrintSemicolon{}
+    \KwIn{Two large numbers $A$, $B$, which both have $n$ decimal digits}
+    \KwResult{$A \times B$}
+    \Begin{
+        $n \leftarrow $ Number of Decimal Digits of $A$ and $B$\;
+        \If{$n \neq 1$}{
+            Divide $A$, $B$ into $A_2$, $A_1$, $B_2$ and $B_1$\;
+            $C_2 \leftarrow DirectDAC(A_2, B_2)$\;
+            $C_1 \leftarrow DirectDAC(A_1, B_1)$\;
+            $C_0 \leftarrow DirectDAC(A_2 + A_1, B_2 + B_1)$\;
+            \KwRet{$C_2 \ll n + (C_0 - C_2 - C_1) \ll (n - 1) + C_1$}\;
+        }
+        \Else{
+            \KwRet{$A \times B$}
+        }
+    }
+    \caption{ModifiedDAC\label{label_for_pseudo_ModifiedDAC}}
+\end{algorithm}
+
+\subsection{复杂度分析}
+同上节的复杂度分析，我们此处也忽略移位操作带来的开销。改进分治法中，我们将问题分解为3个乘法子问题与6个加法子问题。
+因此有：
+\begin{displaymath}
+    \begin{split}
+        T(n)
+        &= 3T(\frac{n}{2}) + 6n\\
+        &= 3T(\frac{n}{2}) + O(n)
+    \end{split}
+\end{displaymath}
+
+根据主方法，$\log_2 3 > 1$. 推出如下定理：
+\begin{theorem}{}{label_for_ModifiedDAC_complexity}
+    用改进分治法计算$A \times B$的时间复杂度为$O(n^{\log_2 3}) \approx O(n^{1.585})$.
+\end{theorem}

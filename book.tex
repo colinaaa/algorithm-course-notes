@@ -1,5 +1,8 @@
 \documentclass[cn]{elegantbook}
-
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{algorithmicx}
+\usepackage{algpseudocodex}
+\usepackage{amsmath}
 \title{何老师算法课笔记}
 \subtitle{还没有想好的副标题}
 \author{计卓1801全体}
@@ -10,11 +13,10 @@
 \cover{cover.png}
 
 \begin{document}
-  \maketitle
-  \tableofcontents
+\maketitle
+\tableofcontents
 
-  % add your code here
-  \input{src/example.tex}
-
-  \bibliography{ref.bib}
+% add your code here
+\input{src/divide_and_conquer_large_int_mul.tex}
+\bibliography{ref.bib}
 \end{document}
