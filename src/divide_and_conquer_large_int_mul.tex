@@ -1,0 +1,75 @@
+\chapter{分治法之大数乘法}
+\begin{introduction}
+    \item 问题背景
+    \item 算法1
+    \item 算法2
+    \item 伪代码及复杂度分析
+\end{introduction}
+
+\section{问题描述}
+给定两个大数$A$和$B$, 试计算
+\begin{math}
+    A * B
+\end{math}.
+其中$A$和$B$分别表示为
+\begin{math}
+    A = a_n a_{n-1} a_{n-2} ... a_2 a_1
+\end{math}
+,
+\begin{math}
+    B = b_n b_{n-1} b_{n-2} ... b_2 b_1
+\end{math}.
+
+\begin{lemma}{“$A + B$”的复杂度}{label_for_a+b}
+    计算$A + B$，其复杂度为$O(n)$, 其中$n$为$A$和$B$的十进制位数。
+\end{lemma}
+\begin{theorem}{“$A * B$”的朴素算法复杂度}{label_for_a*b}
+    朴素算法下，将$A$与$B$的各位相乘，再相加各次相乘的结果。
+    不难得出，这一过程需要进行$n$次基本乘法与$n+1$次加法。
+    根据引理\ref{lem:label_for_a+b}，朴素算法下计算$A * B$的时间复杂度为$O(n^2)$.
+\end{theorem}
+由定理\ref{thm:label_for_a*b}和引理\ref{lem:label_for_a+b}可知，朴素的大数乘法相比加法运算在时间复杂度上高出了一个量级。
+由于乘法在计算机中大量存在，我们希望找到更好的算法来降低乘法计算的时间复杂度，以提升计算机的性能。
+分治法为我们提供了一条途径。
+\section{直接分治法}
+\subsection{算法描述}
+这是一种简单的分治方法，将两个大数分为前后两部分，进行相乘。不失一般性，这里假设$n$为偶数。将$A$与$B$分割为$A_2$,$A_1$,$B_2$,$B_1$,即：
+\begin{displaymath}
+    A_2 = a_{n} a_{n-1} ... a_{\frac{n}{2} + 2} a_{\frac{n}{2} + 1}
+\end{displaymath}
+\begin{displaymath}
+    A_1 = a_{\frac{n}{2}} a_{\frac{n}{2} - 1} ... a_2 a_1
+\end{displaymath}\\
+则$A$被表示为$A = A_2 * 2^{\frac{n}{2}} + A_1$.
+同理，$B$可以进行类似的分割，即：
+\begin{displaymath}
+    B_2 = b_{n} b_{n-1} ... b_{\frac{n}{2} + 2} b_{\frac{n}{2} + 1}
+\end{displaymath}
+\begin{displaymath}
+    B_1 = b_{\frac{n}{2}} b_{\frac{n}{2} - 1} ... b_2 b_1
+\end{displaymath}\\
+$B$被表示为$B = B_2 * 2^{\frac{n}{2}} + B_1$.\\
+对我们的问题而言，计算$A * B$则可以表示为：
+\begin{displaymath}
+    \begin{split}
+        A * B
+        & = (A_2 * 2^{\frac{n}{2}} + A_1) * (b_{\frac{n}{2}} b_{\frac{n}{2} - 1} ... b_2 b_1) \\
+        & = A_2 B_2 * 2^n + (A_2 B_1 + A_1 B_2) * 2^{\frac{n}{2}} + A_1 B_1
+    \end{split}
+\end{displaymath}
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \KwData{this text}
+    \KwResult{how to write algorithm with \LaTeX2e }
+    initialization\;
+    \While{not at end of this document}{
+        read current\;
+        \eIf{understand}{
+            go to next section\;
+            current section becomes this one\;
+        }{
+            go back to the beginning of current section\;
+        }
+    }
+    \caption{How to write algorithms}
+\end{algorithm}
