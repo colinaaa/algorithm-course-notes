@@ -31,6 +31,11 @@ TEX=\
 make dev
 ```
 
+## FAQ
+
+- *Q:* 编译出错: ! LaTeX Error: File `pgfornament.sty' not found.
+- *A:* 见 [#8](https://github.com/colinaaa/algorithm-course-notes/issues/8)
+
 ## 工具链
 
 - TexLive 2020
