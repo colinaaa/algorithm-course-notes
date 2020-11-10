@@ -1,7 +1,7 @@
 SRC=src
 
 TEX=\
-	$(SRC)/example.tex\
+	$(SRC)/Ln9-NearestPoints.tex\
 
 all: book.pdf
 .PHONY: all clean dev clean-all
