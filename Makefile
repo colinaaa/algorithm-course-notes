@@ -2,6 +2,7 @@ SRC=src
 
 TEX=\
 	$(SRC)/divide_and_conquer_large_int_mul.tex\
+	$(SRC)/Ln9-NearestPoints.tex\
 
 all: book.pdf
 .PHONY: all clean dev clean-all
