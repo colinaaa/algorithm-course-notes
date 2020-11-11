@@ -11,6 +11,7 @@
 *.cb
 *.cb2
 .*.lb
+
 ## Intermediate documents:
 *.dvi
 *.xdv
@@ -274,5 +275,3 @@ TSWLatexianTemp*
 # Makeindex log files
 *.lpz
 tmp
-
-book.pdf
