@@ -59,10 +59,10 @@ $O(n^2)$。那么有没有更快的算法呢？本章我们使用经典的算法
 这里，我们将所有横坐标与分治点$p_{\lfloor\frac{n}{2}\rfloor}$的横坐标
 $x_{\lfloor\frac{n}{2}\rfloor}$差值小于$\delta$的点组成集合$B$，即
 \begin{equation*}
-    B = \{p_i\ \big|\ 
+    B = \{p_i\ \big|\
         \left|x_i - x_{\lfloor\frac{n}{2}\rfloor}\right| \le \delta ,\
         1 \le i \le n\}
-\end{equation*}   
+\end{equation*}
 因为只有$B$集合中的点之间的距离才有可能小于$\delta$。
 $B$集合如下图\autoref{fig3}中阴影部分所示:
 \begin{figure}[htb]
@@ -84,7 +84,7 @@ $B$集合如下图\autoref{fig3}中阴影部分所示:
 考虑到$C(p_i)$会因为归并操作而维持在$O(n)$数量级，其实不然，该集合的大小不会超过7。下面给出
 证明。
 
-根据定义，$C(p_i)$中的点的纵坐标均处于$(y_i - \delta, y_i]$范围内，且其中的所有点
+根据定义，$C(p_i)$中的点的纵坐标均处于$\interval[open left]{y_i - \delta}{y_i}$范围内，且其中的所有点
 的横坐标均处于$\left( x_m - \delta, x_m + \delta \right)$范围内。
 这样便构成了一个$2\delta\times\delta$的矩形。如下图\autoref{fig4}所示
 \begin{figure}[htb]
@@ -114,9 +114,9 @@ $C(p_i)\cap P_1$，右侧正方形的点集为$C(p_i)\cap P_2$，从上述的分
 
 \[
     T(n) = \begin{cases}
-        O(1) & 2 \le n \le 3 \\ 
+        O(1) & 2 \le n \le 3 \\
         2T(\frac{n}{2}) + O(n) & n > 3
-    \end{cases} 
+    \end{cases}
 \]
 
 推导如下：
@@ -126,7 +126,7 @@ $C(p_i)\cap P_1$，右侧正方形的点集为$C(p_i)\cap P_2$，从上述的分
              &= 2^2T(\frac{n}{2^2}) + 2O(n)\\
              &\vdots \\
              &= 2^k T(\frac{n}{2^k}) + kO(n)\ \ (n = 2 ^ k)\\
-             &= O(n) + O(n\log n) \\ 
+             &= O(n) + O(n\log n) \\
              &= O(n\log n)
 \end{align*}
 
@@ -139,7 +139,7 @@ $C(p_i)\cap P_1$，右侧正方形的点集为$C(p_i)\cap P_2$，从上述的分
     }
     \KwResult{the minimum distance $\delta$}
 \Begin{
-    \If{$\left| P \right| <= 3$}{ 
+    \If{$\left| P \right| <= 3$}{
         Return the minimum Euclidean-Distance between each pair of points.
     }
     $m \leftarrow \lfloor \frac{n}{2} \rfloor$\;
