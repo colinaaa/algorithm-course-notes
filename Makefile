@@ -4,7 +4,9 @@ TEX=\
 	$(SRC)/example.tex\
 	$(SRC)/dynamic-programming-1.tex\
 	$(SRC)/Network-flows.tex\
-	
+	$(SRC)/Ln9-NearestPoints.tex\
+	$(SRC)/Ln11-LargeIntegerMultiplication.tex\
+
 all: book.pdf
 .PHONY: all clean dev clean-all
 
