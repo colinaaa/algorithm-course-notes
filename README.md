@@ -1,12 +1,12 @@
 # Welcome to algorithm-course-notes 👋
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-1.2.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 ![build-CI](https://github.com/colinaaa/algorithm-course-notes/workflows/build-CI/badge.svg)
 ![Upload Release Asset](https://github.com/colinaaa/algorithm-course-notes/workflows/Upload%20Release%20Asset/badge.svg)
 
 > 算法课笔记
 
-### ✨ [Demo](https://github.com/colinaaa/algorithm-course-notes/releases/download/v1.0.0/book.pdf)
+### ✨ [Demo](https://github.com/colinaaa/algorithm-course-notes/releases/download/v1.2.0/book.pdf)
 
 ## 添加新章节
 
@@ -30,6 +30,11 @@ TEX=\
 ```sh
 make dev
 ```
+
+## FAQ
+
+- *Q:* 编译出错: ! LaTeX Error: File `pgfornament.sty' not found.
+- *A:* 见 [#8](https://github.com/colinaaa/algorithm-course-notes/issues/8)
 
 ## 工具链
 

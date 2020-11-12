@@ -1,22 +1,39 @@
 \documentclass[cn]{elegantbook}
 \usepackage[ruled,vlined]{algorithm2e}
 
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\def\figureautorefname{图}
+
+\SetAlgorithmName{算法}{算法}{算法索引}
+
+\renewcommand*{\lstlistingname}{代码}
+
 \title{何老师算法课笔记}
 \subtitle{还没有想好的副标题}
 \author{计卓1801全体}
 \institute{华中科技大学}
 \date{\zhtoday}
-\version{1.0.0}
+\version{1.2.0}
 \logo{logo.png}
 \cover{cover.png}
 
 \begin{document}
 \maketitle
 \tableofcontents
+\pagenumbering{arabic}
 
-  % add your code here
-  \input{src/Ln9-NearestPoints.tex}
-  \input{src/Ln11-LargeIntegerMultiplication.tex}
+% add your code here
+\input{src/example.tex}
+\input{src/dynamic-programming-1.tex}
+\input{src/Network-flows.tex}
+\input{src/Ln9-NearestPoints.tex}
+\input{src/Ln11-LargeIntegerMultiplication.tex}
 
 \bibliography{ref.bib}
 \end{document}
