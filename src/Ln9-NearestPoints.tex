@@ -12,7 +12,7 @@
 设计算法寻找欧式距离最近的点对$(A,B)$。
 \begin{figure}[htb]
     \centering
-    \includegraphics[scale=0.5]{Ln9.image/NearestPointsDef.png}
+    \includegraphics[scale=0.5]{image/NearestPointsDef.png}
     \caption{问题定义图例}\label{fig1}
 \end{figure}
 
@@ -40,7 +40,7 @@ $O(n^2)$。那么有没有更快的算法呢？本章我们使用经典的算法
 
 \begin{figure}[htb]
     \centering
-    \includegraphics[scale=0.5]{Ln9.image/NearestPointsDivide.png}
+    \includegraphics[scale=0.5]{image/NearestPointsDivide.png}
     \caption{分治过程图例}\label{fig2}
 \end{figure}
 
@@ -67,7 +67,7 @@ $x_{\lfloor\frac{n}{2}\rfloor}$差值小于$\delta$的点组成集合$B$，即
 $B$集合如下图\autoref{fig3}中阴影部分所示:
 \begin{figure}[htb]
     \centering
-    \includegraphics[scale=0.5]{Ln9.image/NearestPointsMerge.png}
+    \includegraphics[scale=0.5]{image/NearestPointsMerge.png}
     \caption{合并过程图例}\label{fig3}
 \end{figure}
 
@@ -89,7 +89,7 @@ $B$集合如下图\autoref{fig3}中阴影部分所示:
 这样便构成了一个$2\delta\times\delta$的矩形。如下图\autoref{fig4}所示
 \begin{figure}[htb]
     \centering
-    \includegraphics[scale=0.5]{Ln9.image/NearestPointsCpi.png}
+    \includegraphics[scale=0.5]{image/NearestPointsCpi.png}
     \caption{$C(p_i)$}\label{fig4}
 \end{figure}。
 
