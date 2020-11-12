@@ -1,12 +1,13 @@
 # Welcome to algorithm-course-notes 👋
-![Version](https://img.shields.io/badge/version-1.2.0-blue.svg?cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-1.3.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 ![build-CI](https://github.com/colinaaa/algorithm-course-notes/workflows/build-CI/badge.svg)
 ![Upload Release Asset](https://github.com/colinaaa/algorithm-course-notes/workflows/Upload%20Release%20Asset/badge.svg)
 
 > 算法课笔记
 
-### ✨ [Demo](https://github.com/colinaaa/algorithm-course-notes/releases/download/v1.2.0/book.pdf)
+### ✨
+[Demo](https://github.com/colinaaa/algorithm-course-notes/releases/download/v1.3.0/book-v1.3.0.pdf)
 
 ## 添加新章节
 
