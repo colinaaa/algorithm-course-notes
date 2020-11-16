@@ -2,6 +2,7 @@ SRC=src
 
 TEX=\
 	$(SRC)/example.tex\
+	$(SRC)/Ln1-AsymptoticOrderGrowth.tex\
 	$(SRC)/dynamic-programming-1.tex\
 	$(SRC)/Network-flows.tex\
 	$(SRC)/Ln9-NearestPoints.tex\
