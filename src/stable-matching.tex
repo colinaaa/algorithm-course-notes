@@ -30,8 +30,8 @@
                 \draw (0,5-0.7*\x) -- (3,5-0.7*\x);
                 \filldraw [fill=white] (0,5-0.7*\x) circle (0.3) node[](m-\x){} (3,5-0.7*\x) circle (0.3) node[](w-\x){};
             }
-            \draw 
-                (m-3) node(){$m$} 
+            \draw
+                (m-3) node(){$m$}
                 (m-4) node(){$m'$}
                 (w-3) node(){$w$}
                 (w-4) node(){$w'$};
@@ -39,7 +39,7 @@
         \caption{不稳定的情况}
         \label{fig:stable-matching-1}
     \end{wrapfigure}
-    给定一个完美匹配$S$，我们应该担心下面的情况（如图\ref{fig:stable-matching-1}）。现在有两个$S$中的匹配$(m,w)$和$(m',w')$，但$m$相对于$w$更倾向于$w'$，
+    给定一个完美匹配$S$，我们应该担心下面的情况（如\autoref{fig:stable-matching-1}）。现在有两个$S$中的匹配$(m,w)$和$(m',w')$，但$m$相对于$w$更倾向于$w'$，
     并且$w'$相对于$m'$更倾向于$m$。在这种情况下，没办法阻止$m$和$w'$放弃当前的对象然后组成新的一对。在这种情况下，我们说$(m,w')$对于$S$来说是个不稳定的对。
     也就是说，尽管$(m,w')$不存在于$S$中，但$m$和$w'$，相对于他们在$S$中的同伴，更倾向于彼此。
 
@@ -50,7 +50,7 @@
             \item 是一个完美匹配
             \item 不存在不稳定的的对
         \end{enumerate}
-    \end{definition}    
+    \end{definition}
 
 \section{算法设计}\label{sec:stable-matching-algorithm}
     依据上文提到的问题，我们来考虑一下求解方法。
@@ -66,7 +66,7 @@
         \item 最后，这个算法会在没有人处于未匹配状态时停止。这时，所有处于约定状态的就成为最终的结果，
             得到了一个稳定匹配。
     \end{itemize}
-    下面就是盖尔-沙普利算法（Gale-Shapley algorithm）的具体描述。\ref{alg:gale-shapley-algorithm}
+    \autoref{alg:gale-shapley-algorithm}就是盖尔-沙普利算法（Gale-Shapley algorithm）的具体描述。
     \begin{algorithm}
         \caption{盖尔-沙普利算法（Gale-Shapley algorithm）}\label{alg:gale-shapley-algorithm}
         \KwData{男性集合$M$,女性集合$W$}
@@ -189,7 +189,7 @@
         考虑$m$被$w$拒绝的时刻，要么是因为$w$已经跟排名更高的$m'$成了约定状态，要么是因为排名更高的$m'$向$w$提出了申请。不管怎样，在那个时刻$w$跟$m'$形成或维持约定状态，$m'$在$w$的排名中比$m$要高。
 
         既然$w$是$m$的一个有效同伴，那么存在一个稳定匹配$S'$包含这个对$(m,w)$。那么，假定这个时候跟$m'$组成对的是$w'$，并且$w‘\neq w$。
-        
+
         在$\varepsilon$中，$m$是第一个被$w$拒绝的有效对象，那么当$m'$向$w$提出申请的时候还没有被有效对象（比如$w'$）拒绝过，也就是说在$m'$看来$w$的排名比$w'$要高。
         并且$m'$在$w$的排名比$m$要高。那么$(m,w')$在$S'$中倾向成为一对，但$(m,w')\notin S'$，这就是个不稳定因素。
 
@@ -218,7 +218,7 @@
         \end{tikzpicture}
         \caption{}\label{fig:stable-matching-3}
     \end{wrapfigure}
-    
+
     \begin{proof}
         假定存在对$(m,w)$在稳定匹配$S^*$中，并且$m$不是$w$的最差有效同伴。那么存在一个稳定匹配$S'$，$w$跟一个比$m$差的人$m'$形成了对。在$S'$中，$m$跟$w'$形成了一对，且$w'\neq w$。
         由定理\ref{thm:stable-matching-7}，我们知道$w$是$m$的最佳有效对象，并且$w'$是$m$的有效对象，那么我们可以说相对于$w'$，$m$更倾向于$w$。
