@@ -1,4 +1,4 @@
-\documentclass[cn]{elegantbook}
+\documentclass[cn,table]{elegantbook}
 
 \usepackage{tikz}
 \usepackage{graphicx}
@@ -7,12 +7,16 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{interval}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{wrapfig}
 
 \intervalconfig{%
 	soft open fences,
 }
 
 \def\figureautorefname{图}
+\def\sectionautorefname{小节}
 
 \SetAlgorithmName{算法}{算法}{算法索引}
 
@@ -35,6 +39,8 @@
 % add your code here
 % \input{src/example.tex}
 \input{src/Ln1-AsymptoticOrderGrowth.tex}
+\input{src/Tiling-Problem.tex}
+\input{src/stable-matching.tex}
 \input{src/Ln9-NearestPoints.tex}
 \input{src/Ln11-LargeIntegerMultiplication.tex}
 \input{src/dynamic-programming-1.tex}
