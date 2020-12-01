@@ -43,7 +43,7 @@
 	给定区间$I_1, I_2, \ldots, I_n$，
 	$s_i$为$I_i$开始时间，$f_i$为$I_i$的结束时间（$f_i>s_i$），$w_i>0$, 假设$\forall i < j$，$ s_i<s_j$。
 	\begin{itemize}
-		\item $OPT(k)$：表示区间集合$\{ I_1, I_2, \ldots , I_i \}$上的最优解权值。
+		\item $OPT(k)$：表示区间集合$\{ I_1, I_2, \ldots , I_k \}$上的最优解权值。
 		\item $P(i)$：表示$I_i$的前驱，当$P(i)=j$时，有$f_j=\max\limits_{1 \leq k < i}\{f_k | f_k < s_i\}$，当$I_i$没有前驱时，$P(i)=0$
 	\end{itemize}
 	目标：寻找一个$\sum w_i$最大的区间子集$R$，满足$\forall I_m,I_n \in R, m < n \text{都有} f_m < s_n$。
