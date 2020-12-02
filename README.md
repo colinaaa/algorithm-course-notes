@@ -6,7 +6,7 @@
 
 > 算法课笔记
 
-### ✨[Demo](https://github.com/colinaaa/algorithm-course-notes/releases/download/v1.6.0/book-v1.6.0.pdf)
+### ✨[Demo](https://github.com/colinaaa/algorithm-course-notes/releases/download/v1.6.1/book-v1.6.1.pdf)
 
 ## 添加新章节
 
