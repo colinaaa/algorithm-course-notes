@@ -33,8 +33,11 @@ make dev
 
 ## FAQ
 
-- *Q:* 编译出错: ! LaTeX Error: File `pgfornament.sty' not found.
+- *Q:* 编译出错: ! LaTeX Error: File <code>`pgfornament.sty'</code> not found.
 - *A:* 见 [#8](https://github.com/colinaaa/algorithm-course-notes/issues/8)
+
+- *Q:* 图片或定理的label应该怎么写？
+- *A:* 见 [#19](https://github.com/colinaaa/algorithm-course-notes/issues/19) 最好使用有意义的名称，若实在没什么含义，也请加上作用域
 
 ## 工具链
 
