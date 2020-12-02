@@ -4,55 +4,53 @@
 \centering 本章简单介绍网络流在图像分割上的应用。
 
 
-\begin{definition}{背景知识}{def1}
-    图像是可以看作由一个个像素组成的巨大图, 将像素一一用边连接起来, 则这些像素点会成为这个巨大图网络的顶点.
-    一个图由前景和背景组成, 假设顶点上的值用 $a_i$ 表示, $ 0 \leq a_i \leq 1 $,  $a_i$ 趋近于 0 表示 $a_i$ 为图的背景, $a_i$ 趋近于 1 表示 $a_i$ 为图的前景, 并且设所有属于前景的顶点 $a_i$ 构成集合 A, 所有属于背景的顶点 $a_j$ 构成集合 B.
-    假设边上的值用 $w_{ij}$ 表示, $w_{ij}$ 设为边的惩罚值, $w_{ij}$ 趋向于 0 表示“分离” (即 $w_{ij}$ 连接的两个点分别属于前景和背景), $w_{ij}$ 趋向于 1 表示“在一起” (即 $w_{ij}$ 连接的两个点都属于前景或者背景)
-    设总的惩罚值为 $ A = \min\left(\sum_{i \epsilon B}a_i +  \sum_{i \epsilon A}(1 - a_j) + \sum_{i \epsilon A, j \epsilon B}w_{ij} \right) $
+\begin{definition}{背景知识}{}
+	图像是可以看作由一个个像素组成的巨大图, 将像素一一用边连接起来, 则这些像素点会成为这个巨大图网络的顶点.
+	一个图由前景和背景组成, 假设顶点上的值用 $a_i$ 表示, $ 0 \leq a_i \leq 1 $,  $a_i$ 趋近于 0 表示 $a_i$ 为图的背景, $a_i$ 趋近于 1 表示 $a_i$ 为图的前景, 并且设所有属于前景的顶点 $a_i$ 构成集合 A, 所有属于背景的顶点 $a_j$ 构成集合 B.
+	假设边上的值用 $w_{ij}$ 表示, $w_{ij}$ 设为边的惩罚值, $w_{ij}$ 趋向于 0 表示“分离” (即 $w_{ij}$ 连接的两个点分别属于前景和背景), $w_{ij}$ 趋向于 1 表示“在一起” (即 $w_{ij}$ 连接的两个点都属于前景或者背景)
+	设总的惩罚值为 $ A = \min\left(\sum_{i \epsilon B}a_i +  \sum_{i \epsilon A}(1 - a_j) + \sum_{i \epsilon A, j \epsilon B}w_{ij} \right) $
 \end{definition}
 
 
 \section{问题实例}
 \subsection{问题描述}
 \begin{itemize}
-    \item 对于下面这个图，利用网络流求解该图前景和背景的最大可能
+	\item 对于下面这个图，利用网络流求解该图前景和背景的最大可能
 \end{itemize}
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[scale=0.6]{image/Image-segmentation2.png}
-	\caption{图片前景背景识别}\label{fig1}
+	\includegraphics[scale=0.8]{image/Image-segmentation2.png}
+	\caption{图片前景背景识别}\label{fig:image-seg-1}
 \end{figure}
 
 \subsection{思路描述}
 \begin{itemize}
-    \item 图形切割算法通过向图 G (V,E) 添加 S 点和 T 点，将图中所有的顶点，与 S 和 T 建立边，
-          如果一个点与 S 相连，则对应边的权值为该点的值 $a_i$, 如果一个点与 T 相连，则对应边的权值为1减去该点的值 $ 1 - a_j $。
-          可以得到下面这个图:
+	\item 图形切割算法通过向图 G (V,E) 添加 S 点和 T 点，将图中所有的顶点，与 S 和 T 建立边，
+	      如果一个点与 S 相连，则对应边的权值为该点的值 $a_i$, 如果一个点与 T 相连，则对应边的权值为1减去该点的值 $ 1 - a_j $。
+	      可以得到下面这个图:
 \end{itemize}
 
 \begin{figure}[htb]
-    \centering
-    \includegraphics[height=4.5cm]{image/Image-segmentation3.png}
-    \caption{图片前景背景识别}\label{fig2}
+	\centering
+	\includegraphics[height=4.5cm]{image/Image-segmentation3.png}
+	\caption{图片前景背景识别}\label{fig:image-seg-2}
 \end{figure}
 
 \begin{itemize}
-    \item   根据最大流最小割, 可以得到得到二分图的最大匹配, 可以得到集合A和B, 保证总的惩罚值 $ A = \min\left(\sum_{i \epsilon B}a_i +  \sum_{i \epsilon A}(1 - a_j) + \sum_{i \epsilon A, j \epsilon B}w_{ij} \right) $ 最小, 
-            最小为 $(0.2 + 0.1) + (1 - 0.9) + (1 - 0.8) + 0.3 + 0.3 = 1.2 $, 而 A 和 B 分别对应图的前景和背景。
+	\item   根据最大流最小割, 可以得到得到二分图的最大匹配, 可以得到集合A和B, 保证总的惩罚值 $ A = \min\left(\sum_{i \epsilon B}a_i +  \sum_{i \epsilon A}(1 - a_j) + \sum_{i \epsilon A, j \epsilon B}w_{ij} \right) $ 最小,
+	      最小为 $(0.2 + 0.1) + (1 - 0.9) + (1 - 0.8) + 0.3 + 0.3 = 1.2 $, 而 A 和 B 分别对应图的前景和背景。
 \end{itemize}
-
-
 
 \section{问题扩展}
 \begin{itemize}
-    \item 假如一个图的前景不是一个整体，
-          而是有两个分开的部分，比如两只在两个不同位置的猫在一个图中。
-          这样一个算法能否将图像上的前景和背景分开？
+	\item 假如一个图的前景不是一个整体，
+	      而是有两个分开的部分，比如两只在两个不同位置的猫在一个图中。
+	      这样一个算法能否将图像上的前景和背景分开？
 \end{itemize}
 
 \begin{figure}[htb]
 	\centering
 	\includegraphics[scale=0.6]{image/Image-segmentation1.png}
-	\caption{图片前景背景识别}\label{fig3}
+	\caption{图片前景背景识别}\label{fig:image-seg-3}
 \end{figure}
