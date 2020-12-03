@@ -13,10 +13,10 @@
 \begin{figure}[htb]
 	\centering
 	\includegraphics[scale=0.5]{image/NearestPointsDef.png}
-	\caption{问题定义图例}\label{fig1}
+  \caption{问题定义图例}\label{fig:nearestpoints-problem-def}
 \end{figure}
 
-如上图\autoref{fig1}中点对$(A,B)$即为问题的答案。
+如\autoref{fig:nearestpoints-problem-def}中点对$(A,B)$即为问题的答案。
 
 \section{分治算法设计}
 对于这样一个问题，我们很直接地可以使用BF (Brute Force)算法进行暴力求解，
@@ -36,12 +36,12 @@ $O(n^2)$。那么有没有更快的算法呢？本章我们使用经典的算法
 	P_2 = \{p_i\ \big|\ \lfloor\frac{n}{2}\rfloor < i \le n\}
 \end{equation*}
 这样就将当前问题约减为两个规模为$\frac{n}{2}$的子问题
-分治过程如\autoref{fig2}中所示。
+分治过程如\autoref{fig:nearestpoints-divide}中所示。
 
 \begin{figure}[htb]
 	\centering
 	\includegraphics[scale=0.5]{image/NearestPointsDivide.png}
-	\caption{分治过程图例}\label{fig2}
+  \caption{分治过程图例}\label{fig:nearestpoints-divide}
 \end{figure}
 
 如此递归下去，我们可以求得两个点集相对应的最近点对距离$\delta_1, \delta_2$，取其中较小值
@@ -64,11 +64,11 @@ $x_{\lfloor\frac{n}{2}\rfloor}$差值小于$\delta$的点组成集合$B$，即
 	1 \le i \le n\}
 \end{equation*}
 因为只有$B$集合中的点之间的距离才有可能小于$\delta$。
-$B$集合如下图\autoref{fig3}中阴影部分所示:
+$B$集合如下图\autoref{fig:nearestpoints-merge}中阴影部分所示:
 \begin{figure}[htb]
 	\centering
 	\includegraphics[scale=0.5]{image/NearestPointsMerge.png}
-	\caption{合并过程图例}\label{fig3}
+  \caption{合并过程图例}\label{fig:nearestpoints-merge}
 \end{figure}
 
 进一步，我们的目标是检验在$B$集合中是否存在距离比$\delta$更近的点对，以此更新当前问题的解
@@ -86,11 +86,11 @@ $B$集合如下图\autoref{fig3}中阴影部分所示:
 
 根据定义，$C(p_i)$中的点的纵坐标均处于$\interval[open left]{y_i - \delta}{y_i}$范围内，且其中的所有点
 的横坐标均处于$\left( x_m - \delta, x_m + \delta \right)$范围内。
-这样便构成了一个$2\delta\times\delta$的矩形。如下图\autoref{fig4}所示
+这样便构成了一个$2\delta\times\delta$的矩形。如下图\autoref{fig:nearestpoints-cpi}所示
 \begin{figure}[htb]
 	\centering
 	\includegraphics[scale=0.5]{image/NearestPointsCpi.png}
-	\caption{$C(p_i)$}\label{fig4}
+  \caption{$C(p_i)$}\label{fig:nearestpoints-cpi}
 \end{figure}。
 
 接着，我们将这个矩形分拆成左右两个$\delta \times \delta$的正方形，左侧正方形的点集为
@@ -154,5 +154,5 @@ $C(p_i)\cap P_1$，右侧正方形的点集为$C(p_i)\cap P_2$，从上述的分
 		}
 		Return $\delta$
 	}
-	\caption{Nearest-Pair\label{NPP}}
+	\caption{Nearest-Pair}\label{alg:NPP}
 \end{algorithm}
