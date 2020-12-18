@@ -4,12 +4,12 @@ TEX=\
 	$(SRC)/Ln1-AsymptoticOrderGrowth.tex\
 	$(SRC)/Tiling-Problem.tex\
 	$(SRC)/stable-matching.tex\
-	$(SRC)/dynamic-programming-1.tex\
-	$(SRC)/Network-flows.tex\
 	$(SRC)/Ln9-NearestPoints.tex\
 	$(SRC)/Ln11-LargeIntegerMultiplication.tex\
-	$(SRC)/Image-segmentation.tex\
+	$(SRC)/dynamic-programming-1.tex\
 	$(SRC)/Ln18-DP-ZeroOneKnapsack.tex\
+	$(SRC)/Network-flows.tex\
+	$(SRC)/Image-segmentation.tex\
 
 all: book.pdf
 .PHONY: all clean dev clean-all
