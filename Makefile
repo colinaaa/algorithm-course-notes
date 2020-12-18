@@ -11,6 +11,7 @@ TEX=\
 	$(SRC)/Ln19-DP-ContextFreeGrammar.tex\
 	$(SRC)/Network-flows.tex\
 	$(SRC)/Image-segmentation.tex\
+	$(SRC)/Ln26-P-NP.tex\
 
 all: book.pdf
 .PHONY: all clean dev clean-all
