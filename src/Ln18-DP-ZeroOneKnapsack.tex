@@ -13,7 +13,7 @@
 \section{基本思路}
 
 \subsection{贪心法}
-事实证明贪心法无法得到0-1背包问题的最优解。给出物体列表以及属性如下表所示：
+下面将举例说明贪心法无法得到0-1背包问题的最优解。给出物体列表以及属性如下表所示：
 
 \begin{center}
 \begin{tabular}{cccccc}
@@ -41,7 +41,7 @@ P/W 最大优先& 0& 0& 1& 1& 0& 99\\
 \end{tabular}
 \end{center}
 
-可见\textbf{贪心算法无法得到最优解}，因此在设计算法时不应该使用贪心策略。
+可见\textbf{事实证明贪心算法无法得到01背包问题最优解}，因此在设计算法时不应该使用贪心策略。
 
 \subsection{动态规划法}
 背包问题具有最优子结构性质，所谓最优子结构性质是指一个问题的最优解中所包含的所有子问题的解都是最优的，所以可以用动态规划法去得到正确的解。这是最基本的背包问题，特点是：每种物品仅有一件，可以选择放或者不放。
@@ -86,10 +86,10 @@ def ZeroOneKnapsack(ItemsInfo,N,V):
 序改成顺序的话，那么则成了 $F[i, v] 由 F[i, v-C_i]$ 推导得到，则没有用到上一轮$i-1$对应的状态，与本题意不符。
 
 \subsection{一个常数优化}
-\textbf{上面空间优化之后伪代码中的第二重循环的下限$C_i$也可以可以改进}。它可以被优化为$max(V-\sum_{i}^{N}W_i,C_i)$，所以二层循环就可以变成
-$$
-for \ \ v \ \ in \ \ range(V,max(V-\sum_{i}^{N}W_i,C_i),-1)
-$$
+\textbf{上面空间优化之后伪代码中的第二重循环$V \rightarrow C_i$的下限$C_i$也可以可以改进}。它可以被优化为$max(V-\sum_{i}^{N}C_i,C_i)$，所以二层循环伪代码就可以变成：
+\begin{lstlisting}[language=python, caption = 一个常数优化] 
+    for v in range(V, max(V - sum(Ci_List), Ci), -1):  //空间优化 + 常数优化
+\end{lstlisting}
 这个优化之所以成立的原因可以使用最初始二维的状态转移方程思考一下。
 
 \section{DP初始化问题}

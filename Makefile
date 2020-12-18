@@ -8,6 +8,7 @@ TEX=\
 	$(SRC)/Ln11-LargeIntegerMultiplication.tex\
 	$(SRC)/dynamic-programming-1.tex\
 	$(SRC)/Ln18-DP-ZeroOneKnapsack.tex\
+	$(SRC)/Ln19-DP-ContextFreeGrammar.tex\
 	$(SRC)/Network-flows.tex\
 	$(SRC)/Image-segmentation.tex\
 
