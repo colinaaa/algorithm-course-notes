@@ -1,0 +1,244 @@
+\chapter{动态规划之上下文无关文法}\label{header-n1150}
+
+\begin{introduction}
+	\item 综述
+	\item 上下文无关文法及其派生树
+	\item CYK算法
+\end{introduction}
+
+\section{综述}\label{header-n1151}
+
+\begin{itemize}
+\item
+  上下文无关语言是一种形式语言（形式语言指在某个字母表上一些有限长字串的集合）。生成这种语言的文法叫做上下文无关文法，常用于计算机中语法分析器（Parsers）的构造。
+\item
+  关于这个文法的具体使用在编译原理（以及计算理论）课程中会有详细的介绍，在这里我们只简要介绍其基本概念，着重介绍一个和上下文无关文法有关的动态规划算法------CYK算法（The
+  CYK Parsing Algorithm）
+\end{itemize}
+
+\section{上下文无关文法及其派生树}\label{header-n1157}
+
+\subsection{上下文无关文法}\label{header-n1158}
+
+\begin{itemize}
+\item
+  下面先举一个上下文无关文法的例子（S为文法的source）：
+\end{itemize}
+
+\(S\rightarrow aBb\) \quad
+\(B\rightarrow aBb|\epsilon\)
+
+\begin{itemize}
+\item
+  根据这个文法，如果我们想生成串aaabbb，可以进行如下推导：
+\end{itemize}
+
+\(S\Rightarrow aBb \Rightarrow aaBbb \Rightarrow aaaBbbb \Rightarrow aaa\epsilon bbb \Rightarrow aaabbb\)
+
+\begin{itemize}
+\item
+  形式化地，我们将上下文无关文法定义成如下四元组形式：
+
+  \begin{itemize}
+  \item
+    \(G=(V,T,S,P)\)，其中\(G\)代表文法，\(V\)代表文法中的变量，\(T\)代表文法最终到达的常量，\(S\)代表文法的起始变量（source），\(P\)代表由变量和常量生成的文法。
+  \item
+    具体的，在上述文法中：
+
+    \begin{itemize}
+    \item
+      \(V=\{S,B\}\)
+    \item
+      \(T=\{a,b\}\)
+    \item
+      \(S=\{S\}\)
+    \item
+      \(P=\{S\rightarrow aBb , B\rightarrow aBb|\epsilon\}\)
+    \end{itemize}
+  \end{itemize}
+\item
+  上述上下文无关文法对应语言：\(L=\{a^nb^n|n为大于或等于1的整数\}\)
+\end{itemize}
+
+\subsection{派生树}\label{header-n1186}
+
+\begin{itemize}
+\item
+  上下文无关文法的派生数指的是把由上下文无关文法生成上下文无关语言的过程用树的形式表示出来，比如19.1.1中的文法可以表示成以下派生树：
+\end{itemize}
+
+\begin{itemize}
+\item
+  可以总结出，派生树的画法是，以S（soruce）节点作为根节点，父节点对应文法的左边，子节点对应文法的右边，建立派生树得到最后的串。最后，从左到右叶子结点的值就是最后生成的串。
+\end{itemize}
+
+\section{CYK算法}\label{header-n1194}
+
+\begin{itemize}
+\item
+  CYK算法是一种基于动态规划思想的算法，要解决的问题是：给定串w，测试这个串是否能够用起始变量S生成。其算法的复杂度为\(O(n^3)\)
+\item
+  CYK算法是由发现相同思想的三个人J. Cocke、 D. Younger和T.
+  Kasami的名字来命名的。
+\item
+  CYK算法不适用于在所有的context free
+  language上直接使用，先要转换成乔姆斯基范式（Chomsky Normal
+  Form）才能实现。
+\end{itemize}
+
+\subsection{CNF（乔姆斯基范式）}\label{header-n1201}
+
+\begin{itemize}
+\item
+  文法只包含以下两种形式：
+\end{itemize}
+
+\(A\rightarrow BC\) \quad
+\(A\rightarrow a\)
+
+\begin{itemize}
+\item
+  概括来说，即只能由变量生成两个变量或者生成一个最终常量
+\item
+  转换方法如下：
+
+  \begin{itemize}
+  \item
+    将常量全部添加\(T_a\rightarrow a\)形式,替换其他生成式中所有的常量为变量
+  \item
+    将文法右侧所有的多变量变成二变量，即把\(A\rightarrow A_0A_1A_2\)替换成\(A\rightarrow A_0B，B\rightarrow A_1A_2\)形式（多变量同理）
+  \end{itemize}
+\item
+  一个转换的例子如下：
+
+  \begin{itemize}
+  \item
+    原文法：\(S\rightarrow ABa，A\rightarrow aab，B\rightarrow Ac\)
+  \item
+    转换后文法：\(S\rightarrow AV_1，V_1\rightarrow BT_a，A\rightarrow T_aV_2，V_2\rightarrow T_aT_b，B\rightarrow AT_c，T_a\rightarrow a，T_b\rightarrow b，T_c\rightarrow c\)
+  \end{itemize}
+\end{itemize}
+
+\subsection{CYK算法的基本内容}\label{header-n1224}
+
+\begin{itemize}
+\item
+  问题的形式化定义：对于一个上下文无关文法G和一个给定的串\(w=a_1a_2...a_n\)，求解是否存在一种推导（或一棵对应的派生树），使得G能够从S（source）生成对应的字串。
+\item
+  动态规划的做法是，构造一个动态规划的表（这里以n=5为例子），如下图所示。
+
+  \begin{itemize}
+  \item
+    水平轴对应串\(w=a_1a_2...a_5\)
+  \item
+    表中\(x_{ij}\)对应着能够满足生成\(A\Rightarrow a_ia_{i+1}...a_j\)的变元A的集合。
+  \item
+    最后，如果source点S属于集合\(x_{1n}\)，证明这个串可以由S生成，否则则不行。
+  \end{itemize}
+\end{itemize}
+
+\subsection{算法一个具体例子上的执行过程}\label{header-n1238}
+
+\begin{itemize}
+\item
+  这一小节我们将用一个例子模拟CYK算法的执行过程，下一节将在此基础上归纳写出CYK算法的关键，也就是动态规划算法的转移方程
+\item
+  考虑以下这个上下文无关文法，我们用其派生树生成了一个长度为7的串，如下图：
+\end{itemize}
+
+\begin{itemize}
+\item
+  对于串\(aaaabab\)，我们构造上述所说的动态规划表如下:
+\end{itemize}
+
+\begin{itemize}
+\item
+  对于上述动态规划表给出说明：
+
+  \begin{itemize}
+  \item
+    首先求解第一行（\(x_{ii}\)）有，其对应的集合就是生成字符串中每一个字符（常量）的源头的集合。例如常量a可以由变量A和C生成，所以其集合就是\{A\textbar C\}，常量b可以由变量B生成，所以其对应的集合就是\{B\}。
+  \item
+    从第二行开始，其结果完全依赖于第一行，例如\(x_{12}\)对应着字符串aa，我们将串aa分成两份，有且只能被分割为第一个a和第二个a这一种情况，那么要求解\(x_{12}\)的值，需要做下面两步：
+
+    \begin{itemize}
+    \item
+      求出\(x_{11}\)和\(x_{22}\)的笛卡尔积。算出结果为\{AA\textbar AC\textbar CA\textbar CC\}。
+    \item
+      寻找该笛卡尔积中的每一个元素对应的源头。例如AA、AC、CA都没有对应的，则都为空集，AC对应的源头为\{B\}。最后的结果将这四个集合求并集，得到\(x_{12}\)的值为\{B\}
+    \end{itemize}
+  \item
+    第二行其余项的算法同计算\(x_{12}\)类似。
+  \item
+    第三行开始，每一个串都有多个划分，比如求解\(x_{13}\)，对应的串为aaa，我们就有两种划分，aa和a、a和aa，那么求解\(x_{13}\)只用遵循以下步骤即可：
+
+    \begin{itemize}
+    \item
+      分别用第二行的策略求出\(x_{12}\)和\(x_{33}\)的笛卡尔积，再寻找其源头，得到第一个集合；求出\(x_{11}\)和\(x_{33}\)的笛卡尔积再寻找其源头，得到第二个集合。
+    \item
+      将上述两个集合求并集得到\(x_{13}\)的结果
+    \end{itemize}
+  \item
+    第三行其余项的算法同理。
+  \item
+    从第四行开始往上走，处理策略与第三行类似，只不过是对于要求解串的划分情况更多了而已。例如\(x_{15}\)对应aaaab，这个串有4种划分情况，将每种情况的笛卡尔积求源头，得到四个集合，对这四个集合求并集即得到\(x_{15}\)的结果。
+  \end{itemize}
+\item
+  下面我们将给出求解\(x_{ij}\)一般化的公式
+\end{itemize}
+
+\subsection{19.3.4 状态转移方程以及算法伪代码}\label{header-n1277}
+
+\begin{itemize}
+\item
+  由上述举例我们已经了解到了具体的求解\(x_{ij}\)（从生成串的索引i到索引j对应的源头）的方法，这里归纳给出一般化公式即可：
+
+  \begin{itemize}
+  \item
+    首先给出一个函数souce(s)，其中s为一个集合或者一个字符（i=1时候），函数功能是求出s对应的源头的集合，例如\(source(a)=\{A|C\}\)，\(source(\{AA|AC|CA|CC\})={B}\)。
+  \item
+    基于求源头函数给出状态转移方程（假设原始串被存在数组a{[}N{]}中，串长为n，下标从1开始）：
+  \end{itemize}
+
+  \(x_{ij}=\begin{cases}\bigcup_{k=i}^{k=j}source(x_{ik}\times x_{kj})& \text{j>i}\\source(a[i])& \text{j=i}\end{cases}\)
+
+  \begin{itemize}
+  \item
+    注：上述公式中\(\times\)符号代表笛卡尔积
+  \end{itemize}
+\item
+  给出算法的为代码如下（假设原始串被存在数组a{[}N{]}中，串长为n，下标从1开始）:
+\end{itemize}
+
+\begin{lstlisting}[language = C++, caption = 算法伪代码]
+context_free(a[N])
+{
+    int dp[N][N] //存表
+    from len=1 to n //按照串长从1到n，横向计算每一行
+        from i=1 to n-len+1 //计算每一行，索引值从1开始到n-len+1
+            j=i+len-1
+            dp[i][j]=compute xij //按照状态转移方程计算dp[i][j]
+    if(S belongs to dp[1][n]) //如果起始点S在dp[1][n]中，这个串就可生成，否则不能生成
+        return true
+    else 
+        return false
+}
+\end{lstlisting}
+
+\subsection{算法复杂度分析}\label{header-n1293}
+
+\begin{itemize}
+\item
+  算法复杂度分析如下：
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    要构建整张动态规划表，需要循环次数\(O(n^2)\)
+  \item
+    每一次循环中，执行\(compute\)
+    \(x_{ij}\)，其中我们语法中变量个数为常数个，即\(O(1)\)，其笛卡尔积的复杂度为\(O(1)\times O(1)=O(1)\)。而我们要对每一个笛卡尔积作不相容的合并操作（即合并集合中没有相同元素），最多合并n-1次，每个集合中元素数量为常数级，这一步不相容union复杂度为\(O(n)\)
+  \item
+    综上，总复杂度为\(O(n)\times O(n^2)=O(n^3)\)
+  \end{enumerate}
+\end{itemize}
