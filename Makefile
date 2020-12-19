@@ -1,7 +1,13 @@
 SRC=src
 
 TEX=\
-
+	$(SRC)/example.tex\
+	$(SRC)/Ln1-AsymptoticOrderGrowth.tex\
+	$(SRC)/dynamic-programming-1.tex\
+	$(SRC)/Network-flows.tex\
+	$(SRC)/Ln9-NearestPoints.tex\
+	$(SRC)/Ln11-LargeIntegerMultiplication.tex\
+	$(SRC)/Image-segmentation.tex\
 	$(SRC)/Ln15-ApproximationAlgorithm.tex\
 
 all: book.pdf

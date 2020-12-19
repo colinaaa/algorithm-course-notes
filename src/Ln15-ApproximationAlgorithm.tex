@@ -134,78 +134,108 @@
 
 \section{MAX-K-SAT}
 
-
-本节将介绍一个最小带权覆盖的近似算法。
+本节将介绍三个MAX-K-SAT的算法。
 
 \subsection{问题描述}
 
-\begin{definition}{最小带权覆盖问题}{weighted-vertex-cover:15Ln-ApproximationAlgorithm}
-	对于给定的图$(V,E)$，各个点有权重w，找到一个点集$S\subset V$，使得该图所有边都至少有一个端点在点集S中，且S中所有点的权重之和比所有可行的解都小。
+\begin{definition}{K-STA问题}{K-SAT:15Ln-ApproximationAlgorithm}
+	对于一个公式F，其由n个子句${C_1,\dot ,C_n}$与运算构成，每个子句又恰好由三个文字或运算构成，即$C_i=L_{i1}\bigvee L_{i2}\bigvee L_{i3}$。求一组文字赋值方案，使得公式F为真。
 \end{definition}
 
-\subsection{算法描述}
+\begin{definition}{MAX-K-SAT问题}{max-K-SAT:15Ln-ApproximationAlgorithm}
+	对于一个K-SAT问题，求一组赋值方案使得值为真的子句数量最多。
+\end{definition}
 
-算法步骤如下：
-\begin{enumerate}
-	
-\end{enumerate}
+\subsection{随机算法}
 
-\subsection{正确性证明}
+\subsubsection{算法描述}
 
-\begin{proposition}{求证}{proof2:15Ln}
-	该算法得到的解是一个顶点覆盖
-\end{proposition}
-证明：
-	因为$\forall e=(u,v)\epsilon E,x_v^*+x_u^*\geqslant 1$，故$x_v^*\geqslant 0.5$或$x_u^*\geqslant 0.5$，故$x_v$和$x_u$至少有一个为1，即至少有一点覆盖该边e。
-\begin{proposition}{求证}{proof3:15Ln}
-	$ALG\leqslant 2\cdot OPT$
-\end{proposition}
-证明：
-	$OPT\geqslant \sum_{v\epsilon G} x_v^*w_v^*$，而又有$x_v\leqslant 2\cdot x_v^*$，故有
-	$ALG=\sum_{v\epsilon G} x_vw_v\leqslant 2\cdot \sum_{v\epsilon G} x_v^*w_v^*\leqslant 2\cdot OPT$，得证。
+对所有文字$L_i (i=1,\cdots,n)$等概率随机赋值
+\[
+	L_i=\begin{cases}
+		0 &P=0.5\\
+		1 &P=0.5
+	\end{cases}
+\]
 
-这是一段代码：
+\subsubsection{算法分析}
+\begin{itemize}
+	\item 易知$P(C_i=1)=1-\frac{1}{2^K} $
+	\item 故有$E(ALG)=E(\sum_{i=1}^n C_i)=\sum_{i=1}^n E(C_i)=n\cdot (1-\frac{1}{2^K})$
+	\item 又由$ALG\leqslant OTP\leqslant n$
+	\item 可得$\frac{E(ALG)}{OPT}\geqslant \frac{E(ALG)}{n}=1-\frac{1}{2^K}\geqslant 0.5$
+	\item 注意这里的分子并不是ALG，而是ALG的期望
+\end{itemize}
 
-\begin{lstlisting}[language=Python, caption=Python example]
-import numpy as np
+\subsection{确定性贪心算法}
 
-def incmatrix(genl1,genl2):
-    m = len(genl1)
-    n = len(genl2)
-    M = None #to become the incidence matrix
-    VT = np.zeros((n*m,1), int)  #dummy variable
+\subsubsection{算法描述}
 
-    #compute the bitwise xor matrix
-    M1 = bitxormatrix(genl1)
-    M2 = np.triu(bitxormatrix(genl2),1)
+对于随机算法有该递推式：$E(ALG1)=\frac{1}{2}E(ALG1|L_i=0)+\frac{1}{2}E(ALG1|L_i=1)$。
+本算法便基于这一点让本算法的E(ALG2)不小于随机算法的E(ALG1)
 
-    for i in range(m-1):
-        for j in range(i+1, m):
-            [r,c] = np.where(M2 == M1[i,j])
-            for k in range(len(r)):
-                VT[(i)*n + r[k]] = 1;
-                VT[(i)*n + c[k]] = 1;
-                VT[(j)*n + r[k]] = 1;
-                VT[(j)*n + c[k]] = 1;
+\begin{algorithm}
+\For{$i=1$\KwTo$n$}{
+	\If{$E(ALG1|L_i=0,L_{i-1},\cdots,L_0)>E(ALG1|L_i=1,L_{i-1},\cdots,L_0)$}{$L_i=0$}
+	\Else{$L_i=1$}
+}
+\end{algorithm}
 
-                if M is None:
-                    M = np.copy(VT)
-                else:
-                    M = np.concatenate((M, VT), 1)
+\subsubsection{算法分析}
+由算法描述可知，对任何$i=1,\cdots,n$都有
+\begin{displaymath}
+	E(ALG2|L_{i-1},\cdots,L_0)=max(E(ALG1|L_i=0,L_{i-1},\cdots,L_0),E(ALG1|L_i=1,L_{i-1},\cdots,L_0))	
+\end{displaymath}
+故有
+\begin{displaymath}
+E(ALG2)=max(E(ALG1|L_i=0),E(ALG1|L_i=1))\geqslant E(ALG1)
+\end{displaymath}
 
-                VT = np.zeros((n*m,1), int)
+\subsection{线性规划算法}
 
-    return M
-\end{lstlisting}
+\subsubsection{算法描述}
 
-更多环境请见文档。
+在线性规划建模中，记$q_i$为$C_i$的值，$y_i$为$L_i$的值，$f_{ij}$为变元$x_i$在$C_i$中的符号。则变为线性规划问题
+\[
+	\begin{cases}
+		q_i、y_i\epsilon [0,1]\\
+		q_i\leqslant \sum _{f_{ij}>0}y_j+\sum _{f_{ij}<0}(1-y_j)\\
+		\max \sum_{i=1,\cdots,n}q_i
+	\end{cases}
+\]
+线性规划求解完成后，取
+\[
+	x_i=\begin{cases}
+		1 &P=y_i\\
+		0 &P=1-y_i
+	\end{cases}
+\]
 
-\section{引用}
-
-\subsection{交叉引用}
-
-引用定理~\ref{thm:label-for-this-theorem}。
-
-\subsection{参考文献}
-
-引用一个参考文献~\cite{cormen2009introduction}
+\subsubsection{算法分析}
+线性规划求解完成后，对任一子句不妨假设其符号全为正，便于证明推导：
+\begin{displaymath}
+	\begin{split}
+		&\because q_i\leqslant \sum_{j=1,\cdots,K} y_j\\
+		&\therefore 1-\frac{q_i}{K}\geqslant \frac{1}{K}\sum_{j=1,\cdots,K}(1-y_j)\ \ \ \ (1)
+	\end{split}
+\end{displaymath}
+故有
+\begin{displaymath}
+	\begin{split}
+		P(C_i=1)&=1-\prod _{j=1}^K(1-y_j)\\
+		&\geqslant[\frac{1}{K}\sum_{j=1}^K(1-y_j)]^K\\
+		(1)\Rightarrow &\geqslant 1-(1-\frac{q_i}{K})^K\\
+		q_i\leqslant 1\Rightarrow &\geqslant q_i[1-(1-\frac{1}{K})^K]\\
+		&\geqslant q_i(1-\frac{1}{e})
+	\end{split}
+\end{displaymath}
+故有
+\begin{displaymath}
+	\begin{split}
+		E(ALG)&=E(\sum_{i=1}^n C_i)=\sum_{i=1}^n E(C_i)\\
+		&=(1-\frac{1}{e})\sum_{i=1,\cdots,n}q_i\\
+		&=(1-\frac{1}{e})*OPT(LP)\\
+		&\geqslant(1-\frac{1}{e})OPT
+	\end{split}
+\end{displaymath}
+即$\frac{E(ALG)}{OPT}\geqslant 1-\frac{1}{e}
