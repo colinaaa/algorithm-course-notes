@@ -7,6 +7,7 @@ TEX=\
 	$(SRC)/Ln9-NearestPoints.tex\
 	$(SRC)/Ln11-LargeIntegerMultiplication.tex\
 	$(SRC)/dynamic-programming-1.tex\
+	$(SRC)/LN16.tex\
 	$(SRC)/Ln18-DP-ZeroOneKnapsack.tex\
 	$(SRC)/Ln19-DP-ContextFreeGrammar.tex\
 	$(SRC)/Network-flows.tex\
