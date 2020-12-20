@@ -12,6 +12,8 @@ TEX=\
 	$(SRC)/Network-flows.tex\
 	$(SRC)/Image-segmentation.tex\
 	$(SRC)/Ln15-ApproximationAlgorithm.tex\
+	$(SRC)/Ln06-MST.tex\
+	$(SRC)/Ln07-redblue.tex\
 	$(SRC)/Ln26-P-NP.tex\
 
 all: book.pdf
