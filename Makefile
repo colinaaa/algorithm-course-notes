@@ -12,6 +12,7 @@ TEX=\
 	$(SRC)/Network-flows.tex\
 	$(SRC)/Image-segmentation.tex\
 	$(SRC)/Ln26-P-NP.tex\
+	$(SRC)/Proof-of-Statute\
 
 all: book.pdf
 .PHONY: all clean dev clean-all
