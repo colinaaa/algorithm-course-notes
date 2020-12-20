@@ -28,11 +28,11 @@
 \end{definition}
 
 \subsection{算法运行步骤}
-1. 初始化：对于给定的图G，将所有边标记为未染色。
-
-2. 在图G中同时运行Red Rule和Blue Rule （可并行运行），直到所有边均被染色为止。
-
-3. 图G中所有的蓝色边即为图G的最小生成树。
+\begin{enumerate}
+	\item 初始化：对于给定的图G，将所有边标记为未染色。
+	\item 在图G中同时运行Red Rule和Blue Rule （可并行运行），直到所有边均被染色为止。
+	\item 图G中所有的蓝色边即为图G的最小生成树。
+\end{enumerate}
 
 算法具体执行过程如\autoref{fig:redblue}
 \begin{figure}[hbt]
@@ -42,26 +42,27 @@
 \end{figure}
 
 \subsection{算法正确性证明}\label{sec:redblue-proof}
-\noindent（1）最优性：Blue Rule染色所得边为最小边
+\begin{enumerate}
+	\item 最优性：Blue Rule染色所得边为最小边
 
 对于图G中的一个割边集D及D中边权最小的边minEdge，如果在Blue Rule运行过程中被染色的是割边集D的其他边biggerEdge，
 则可以在最后得到的MST中将biggerEdge从中删除然后将minEdge加入到MST中，可以得到更小的最小生成树。产生矛盾。所以Blue Rule染色所得边为最小边。
-
-\noindent（2）合法性：算法所得所有蓝边为无环连通图
+\item 合法性：算法所得所有蓝边为无环连通图
 
 由于Blue Rule可知每次选边都不会成环。下证所得为连通图，假设最后所得所有蓝边构成的图不连通或仍然有点未被蓝边连接。
 
 对于第一种情况，则任选某一蓝边的一个顶点并从该顶点开始的所有能通过蓝边的顶点记为集合X，
 S与V/S构成图G的一个割，由Red Rule中所选环C不含红色边可知其割边集不可能全部被染成红色，则说明一定有未染色的边，再应用一次Blue Rule即可增大S的点的个数，
 重复上述过程直到S=E;对于第二种情况，由于孤立点必不可能在某个环中，所以连接该点的边一定不会被Red Rule染成红色，所以此时应用一次Blue Rule即可使得该点被蓝边连接。综上，算法所得所有蓝边为连通图
+\end{enumerate}
 
 \section{Boruvka算法}
 \subsection{算法运行步骤}
-1. 初始化：对于给定的图G，将所有边标记为未染色；将每个顶点作为一个连通块。
-
-2. 对于所有蓝边连成的连通块应用Blue Rule并将所有Blue Rule选中的边染成蓝色，直到只有一个连通块。
-
-3. 最后得到的蓝边连成的连通块即为图G的最小生成树。
+\begin{enumerate}
+	\item 初始化：对于给定的图G，将所有边标记为未染色；将每个顶点作为一个连通块。
+	\item 对于所有蓝边连成的连通块应用Blue Rule并将所有Blue Rule选中的边染成蓝色，直到只有一个连通块。
+	\item 最后得到的蓝边连成的连通块即为图G的最小生成树。
+\end{enumerate}
 
 算法具体执行过程如\autoref{fig:boruvka}
 \begin{figure}[h]
@@ -73,6 +74,7 @@ S与V/S构成图G的一个割，由Red Rule中所选环C不含红色边可知其
 算法复杂度分析：每次应用Blue Rule后连通块数量至少减半，每次都要遍历所有边，所以算法串行时间复杂度为O(E$\log V$)，并行时间复杂度为O(E)。
 
 \subsection{算法正确性证明}
-\noindent（1）最优性：根据~\ref{sec:redblue-proof}中的证明:Blue Rule染色所得边为最小边。
-
-\noindent（2）合法性：一定不会构成环。如果存在环说明一个点的最小连边有两个，与Blue Rule矛盾。
+\begin{enumerate}
+	\item 最优性：根据~\ref{sec:redblue-proof}中的证明:Blue Rule染色所得边为最小边。
+	\item 合法性：一定不会构成环。如果存在环说明一个点的最小连边有两个，与Blue Rule矛盾。
+\end{enumerate}

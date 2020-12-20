@@ -75,18 +75,14 @@ H is a spanning tree of G if H is both acyclic and connected.
 
 \begin{theorem}{}{ST-theorem}
 	如果H = (V, T)是一个无向图G = (V, E)的子图，那么，以下各条件等价：
-
-	1. H是G的一棵生成树
-
-	2. H是无环且连通的
-
-	3. H是连通的并且有 V – 1条边
-
-	4. H是无环的并且有 V – 1条边
-
-	5. 任意拿掉H的一条边，就不再使其连通
-
-	6. 任意增加一条边，则H就会构成环
+	\begin{enumerate}
+		\item H是G的一棵生成树
+		\item H是无环且连通的
+		\item H是连通的并且有 V – 1条边
+		\item H是无环的并且有 V – 1条边
+		\item 任意拿掉H的一条边，就不再使其连通
+		\item 任意增加一条边，则H就会构成环
+	\end{enumerate}
 
 \end{theorem}
 
@@ -138,21 +134,21 @@ of the edge costs in T is minimized.
 
 \subsection{算法正确性证明}
 \noindent记图G是一个连通图，Y是对p使用prim算法得到的一棵生成树，$Y_1$是p的一棵最小生成树
+\begin{enumerate}
+	\item 若Y=$Y_1$，显然prim算法是正确的
+	\item 若Y≠$Y_1$，可进行如下推导：
 
-\noindent1.若Y=$Y_1$，显然prim算法是正确的
-
-\noindent2.若Y≠$Y_1$，可进行如下推导：
-
-a）Y中有$n( n \geq 1 )$条边不存在于$Y_1$中，在构建Y的过程中，第一次遇到这样的一条边时（以e表示），
-则e的一个端点u落在V内(V是之前的prim运算得到的一个子顶点集)，另一个端点v落在V外
-
-b）$Y_1$是连通的，故$Y_1$中存在u到v的一条的路径，此路径上必然存在一条边f，它的一个端点落在V内，另一个端点落在V外
-
-c）把e加入$Y_1$，去掉f，$Y_1$仍然连通，根据prim算法，权值$W(f) \geq W(e)$，否则e不会被选入V，
-如果$W(f)>W(e)$,新构建的树的权值和会比$Y_1$小，而$Y_1$是最小生成树，因此$W(f)>W(e)$不成立，得$W(f)=W(e)$
-
-d）对每一条类似e的边，重复过程c），最终Y和重新构建的的$Y_1$拥有的边完全一致，
-新构建的$Y_1$也是最小生成树，因此Y也是最小生成树，证明prim算法正确
+	a）Y中有$n( n \geq 1 )$条边不存在于$Y_1$中，在构建Y的过程中，第一次遇到这样的一条边时（以e表示），
+	则e的一个端点u落在V内(V是之前的prim运算得到的一个子顶点集)，另一个端点v落在V外
+	
+	b）$Y_1$是连通的，故$Y_1$中存在u到v的一条的路径，此路径上必然存在一条边f，它的一个端点落在V内，另一个端点落在V外
+	
+	c）把e加入$Y_1$，去掉f，$Y_1$仍然连通，根据prim算法，权值$W(f) \geq W(e)$，否则e不会被选入V，
+	如果$W(f)>W(e)$,新构建的树的权值和会比$Y_1$小，而$Y_1$是最小生成树，因此$W(f)>W(e)$不成立，得$W(f)=W(e)$
+	
+	d）对每一条类似e的边，重复过程c），最终Y和重新构建的的$Y_1$拥有的边完全一致，
+	新构建的$Y_1$也是最小生成树，因此Y也是最小生成树，证明prim算法正确
+\end{enumerate}
 
 \subsection{算法复杂度}
 普通堆优化的 Prim 算法复杂度为 $O(mlogn)$，而斐波那契堆优化的 Prim 算法
@@ -197,30 +193,34 @@ Kruskal算法每次会向T添加一条最小权重的边,并且不能形成环.
 现在我们假设对 $0 \leq m < K-1$, E(m) 已经满足条件,是$T_1$的子集. 我们来看 E(m+1)的情况,
 有E(m+1) = E(m) + {e}, e为算法当前新增的最小权重边.此时分两种情况:
 
-1. 如果{e}是$T_1$的子集,那么问题解决;
+\begin{enumerate}
+	\item 如果{e}是$T_1$的子集,那么问题解决;
+	\item 如果{e}不是$T_1$的子集, 那么我们要证明 E(m+1) 属于一颗其他的MST子集：
 
-2. 如果{e}不是$T_1$的子集, 那么我们要证明 E(m+1) 属于一颗其他的MST子集：
-
-因为{e}不是$T_1$的边, 所以 $T_1$ + {e} 必然有环C(性质1), 同时 E(m) 属于 $T_1$ ,
-那么在环C上必然有一个{e'} 不属于E(m) (因为如果属于E(m)的化, 那么算法当前选择的{e}会导致一个环, 与性质1违背).
-
-现在我们定义$T_2$ = $T_1$ + {e} - {e'}, 又因为E(m+1) = E(m) + {e} 所以 E(m+1) 属于$T_2$的子集.$T_2$是一颗MST.
-
-因为{e} 和 {e'} 都不属于 E(m), 算法当前选择的是{e} 说明 $weight({e'}) \geq weight({e})$.
-所以我们看$weight(T_2) = weight(T_1) + weight({e}) - weight({e'}) \leq weight(T_1)$ .
-
-这意味着$T_1$是$T_2$的权重upper-bound, 但由于$T_1$已经是MST, 所以必然的$T_2$也是MST. 至此得证.
+	因为{e}不是$T_1$的边, 所以 $T_1$ + {e} 必然有环C(性质1), 同时 E(m) 属于 $T_1$ ,
+	那么在环C上必然有一个{e'} 不属于E(m) (因为如果属于E(m)的化, 那么算法当前选择的{e}会导致一个环, 与性质1违背).
+	
+	现在我们定义$T_2$ = $T_1$ + {e} - {e'}, 又因为E(m+1) = E(m) + {e} 所以 E(m+1) 属于$T_2$的子集.$T_2$是一颗MST.
+	
+	因为{e} 和 {e'} 都不属于 E(m), 算法当前选择的是{e} 说明 $weight({e'}) \geq weight({e})$.
+	所以我们看$weight(T_2) = weight(T_1) + weight({e}) - weight({e'}) \leq weight(T_1)$ .
+	
+	这意味着$T_1$是$T_2$的权重upper-bound, 但由于$T_1$已经是MST, 所以必然的$T_2$也是MST. 至此得证.	
+\end{enumerate}
 
 \subsection{算法复杂度分析及优化}
 \begin{theorem}{}{Kruskal-theorem}
 	Kruskal’s algorithm can be implemented to run in $O(m log m)$ time.
 \end{theorem}
 
-1. Sort edges by cost:$O(m log m)$.
+\begin{enumerate}
+	\item Sort edges by cost:$O(m log m)$.
+	\item Use union–find data structure to dynamically maintain connected components:$O(m \alpha (n))$.
+\end{enumerate}
 
-2. Use union–find data structure to dynamically maintain connected components:$O(m \alpha (n))$.
-
-注： $\alpha (n)$是反阿克曼函数，阿克曼函数 $A(m,n)$ 增长极快，其反函数几乎是常数。
+\begin{remark}
+	$\alpha (n)$是反阿克曼函数，阿克曼函数 $A(m,n)$ 增长极快，其反函数几乎是常数。
+\end{remark}
 
 下面将简要介绍并查集(union–find data structure)有关内容。
 \subsection{并查集}
