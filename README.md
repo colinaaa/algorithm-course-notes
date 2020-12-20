@@ -1,19 +1,19 @@
 # Welcome to algorithm-course-notes 👋
-![Version](https://img.shields.io/badge/version-1.6.2-blue.svg?cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-1.8.0-blue.svg?cacheSeconds=2592000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 ![build-CI](https://github.com/colinaaa/algorithm-course-notes/workflows/build-CI/badge.svg)
 ![Upload Release Asset](https://github.com/colinaaa/algorithm-course-notes/workflows/Upload%20Release%20Asset/badge.svg)
 
 > 算法课笔记
 
-### ✨[Demo](https://github.com/colinaaa/algorithm-course-notes/releases/download/v1.6.2/book-v1.6.2.pdf)
+### ✨[Demo](https://github.com/colinaaa/algorithm-course-notes/releases/download/v1.8.0/book-v1.8.0.pdf)
 
 ## 添加新章节
 
 1. 在`src`中添加新文件`xxx.tex`（可参考`example.tex`）
 2. 在`Makefile`的`SRC`中添加`xxx.tex`
 
-```Makefile
+```make
 TEX=\
 	$(SRC)/example.tex\
 	$(SRC)/xxx.tex\
