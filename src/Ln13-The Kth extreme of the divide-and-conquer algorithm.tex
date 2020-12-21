@@ -1,0 +1,137 @@
+\chapter{分治算法之第 K 极值}
+\begin{introduction}
+	\item 问题引入
+	\item 分治思路
+	\item 复杂度分析
+	\item 优化
+	\item 其他值得关注的点
+	\item 分治思路
+	
+\end{introduction}
+
+\section{问题引入}
+给定一个长度为 $n$的序列 $N$，求整个序列中第 $k$小的数。
+\section{分治思路}
+称这个问题为$\text { question }(N, k)$，模仿快速排序的做法，在序列中随机选择一个数作为中间标记tag后将
+小于tag数放到tag左边，其余数放到tag右边。
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.5]{image/kth1.png}
+  \caption{模仿快速排序}\label{fig:nearestpoints-divide}
+\end{figure}
+这样我们得到了两个小一点的序列。为了后文的叙述方便，我们称在  t a g  左 侧的序列为  $N_{l}$,  长度为  $\left|N_{l}\right|$,  在$ \operatorname{tag}$ 右侧的序列为 $N_{r}$,  长度为$  \left|N_{r}\right|$ 。
+到这一步，我们将问题拆解为如下三种情况:
+$$
+\text {question}(N, k)=\left\{\begin{aligned}
+\text {question}\left(N_{l}, k\right) ,&\left|N_{l}\right|>=k \\
+\text {tag} ,&\left|N_{l}\right|=k-1 \\
+\text {question}\left(N_{r}, k-\left|N_{l}\right|-1\right) ,&\left|N_{l}\right|<k-1
+\end{aligned}\right.
+$$
+按照上述方法不断递归下去，直到中间某一步达成 $ \left|N_{l}\right|=k-1$  的条件时, 就得到想要的结果了。
+
+\section{复杂度分析}
+因为算法中每一步的 tag都是随机取的，所以我们在分析复杂度时不仅要 考虑理想情况，也要考虑最坏情况。
+最佳情况  \quad  每一次的  t a g  都恰好为序列的中间值，即每次操作都将问题规 模缩小为原来的一半。于是由经典的分治算法复杂度计算我们可以得到:
+$$T(n)=T\left(\frac{n}{2}\right)+n$$
+由主定理可以得到此时的时间复杂度
+$$T(n) \in O(n)$$
+
+最坏情况 每一次tag都恰好为序列的最大值或者最小值，即每次操作都 只能将问题规模减 1。于是我们可以的得到:
+$$
+T(n)=1+2+3+\cdots+(n-1)+n
+$$
+即
+$$
+T(n)=\frac{n(n+1)}{2}
+$$
+所以最坏情况的时间复杂度
+$$
+T(n) \in O\left(n^{2}\right)
+$$
+中间情况  \quad  我们虽然很难保证每次  t a g  的选取都恰好选中序列的中间值，但
+如果我们能保证每次选取的  t a g  都在某个区间范围内，这种中间情况会比 最坏情况好很多。
+比如，假如我们能够保证每次操作得到的  
+$$\left|N_{l}\right|  $$
+都满足式：
+
+$$\frac{1}{4}|N| \leq\left|N_{l}\right| \leq \frac{3}{4}|N|$$
+
+这样每次操作至少将问题规模缩小为原来的  \frac{3}{4} \circ  于是有:
+
+$$T(n) \leq T\left(\frac{3}{4} n\right)+n$$
+
+由主定理得:
+
+$$T(n) \in O(n)$$
+
+\section{优化}
+在复杂度分析-最坏情况中我们提到的算法有着明显的缺陷，即在最坏情况 下，算法的时间复杂度可能是 
+$$O\left(n^{2}\right)$$
+级别的。但是在复杂度分析-中间情 况中，我们也提到了一种中间情况，在这种情况下，算法的时间复杂度和最 优情况的时间复杂度是近似的，都是  O(n)  。
+那么，我们该如何选取  t a g,  以保证式 成立呢?
+两次取中法
+1. 将 $ \mathrm{n}$  个元素每 5 个一组，分成  $\frac{n}{5}$(  上界  )  组。
+2. 取出每一组的中位数。
+3. 查找上一步中所有中位数的中位数作为 tag，偶数个中位数的情况下 设定为选取中间较小的一个。
+直观上如下图所示:
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.5]{image/kth2.png}
+  \caption{模仿快速排序}\label{fig:nearestpoints-divide}
+\end{figure}
+
+这样一来，X部分的数一定都大于mm, 而W  部分的数一定都小于  m m  。 所以，每次操作至少有  \frac{3 n-6}{10}  个元素被易除，即最多只剩  $\frac{7 n+6}{10} $ 个元素。
+第一次组内取中时，每组消耗常数时间，共有  $ \frac{n}{5} $  组，因此第一次取中的时 间复杂度为  $ c n \in O(n) $ （ c  为某常数  ) 。  第二次中位数序列取中，实质上等价 于问题 
+$\text { question }\left(N_{m}, \frac{\left|N_{m}\right|}{2}\right)$,
+($N_{m}$为中位数序列)而  $ \left|N_{m}\right|=\frac{n}{5} $ ,  所以， 可 以写出优化后的算法时间复杂度递推式:
+$$T(n) \leq T\left(\frac{n}{5}\right)+T\left(\frac{7 n+6}{10}\right)+O(n)$$
+接下来我们将证明
+$$T(n) \in O(n)$$
+首先，根据  T(n)  的定义，  T(n)  是一个单调递增函数。当  n  足够大时，我 们可以对式 进行放缩，得到式
+$$T(n) \leq T\left(\frac{n}{5}\right)+T\left(\frac{3}{4} n\right)+O(n)$$
+根据 $ O(n) $ 的定义，式还 可写成
+$$T(n) \leq T\left(\frac{n}{5}\right)+T\left(\frac{3}{4} n\right)+c n$$
+其中  c  为某常数。接下来我们试图证明
+$$T(n) \leq 20 \mathrm{cn}$$
+我们知道 $ n=1 $ 时有
+$$T(n) \leq 20 \mathrm{cn} \quad(n=1)$$
+假设 $ n \leq k$  时式 也成立，那么当  $n=k+1$  时，有
+$$
+\frac{n}{5} \leq k \\
+\frac{3}{4} n \leq k
+$$
+$$
+T\left(\frac{n}{5}\right) \leq 4 c n \\
+$$
+\text { 所以 } \\
+$$
+ T\left(\frac{3}{4}\right) n \leq 15 c n
+
+$$
+
+\text { 得证，这样，在加入两次取中法后，我们的算法就能够保证时间复杂度为}
+$ O(n)$
+
+\text { 级别 } \\
+
+\section{其它值得关注的点}
+两次取中的间值
+在优化中，从式 推导到式时，我们假设  n  足够大，那么  n  到底要有多大 才适合使用两次取中法呢?
+式 推到式需 要满足如下条件:
+$$
+\frac{7 n+6}{10} \leq\left\lfloor\frac{3}{4} n\right\rfloor
+$$
+解得
+$$
+n \geq 44
+$$
+所以，当递归到数据规模小于 44 时，便可不用两次取中法来取  t a g 了 。 
+两次取中的分组大小
+当数据规模较大时，两次取中法的分组大小会明显影响程序运行时间，下图 是一次实验结果的截图，时间单位为秒。
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.5]{image/kth3.png}
+  \caption{分组大小影响程序效率}\label{fig:nearestpoints-divide}
+\end{figure}
+可以看到，适当的提高分组的大小能够增加程序运行的效率。
