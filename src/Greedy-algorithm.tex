@@ -23,7 +23,46 @@
 \end{example}
 
 \subsection{算法设计}
-
+\begin{figure}[hbt!]
+	\centering
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\draw[|-|] (0, 0) -- node [above] {\scriptsize } (1, 0);
+			\draw[|-|] (1.2,0) -- node [above] {\scriptsize } (2.2,0);
+			\draw[|-|] (0.5 , -0.5) -- node  [above] {\scriptsize } (1.5, -0.5);
+		\end{tikzpicture}
+		\caption{}\label{fig:counterexample1}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\draw[|-|] (0, 0) -- node [above] {\scriptsize }  (2.5, 0);
+			\draw[|-|] (0.3, -0.5) -- node [above] {\scriptsize } (0.7, -0.5);
+			\draw[|-|] (0.8, -0.5) -- node [above] {\scriptsize } (1.5, -0.5);
+			\draw[|-|] (1.6, -0.5) -- node [above] {\scriptsize } (2.0, -0.5);
+		\end{tikzpicture}
+		\caption{}\label{fig:counterexample2}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\draw[|-|] (0, 0) -- node [above] {\scriptsize }  (1, 0);
+			\draw[|-|] (1.2, 0) -- node [above] {\scriptsize }  (2.2, 0);
+			\draw[|-|] (2.4, 0) -- node [above] {\scriptsize }  (3.4, 0);
+			\draw[|-|] (3.6, 0) -- node [above] {\scriptsize }  (4.4, 0);
+			\draw[|-|] (0.6, -0.5) -- node [above] {\scriptsize } (1.6, -0.5);
+			\draw[|-|] (0.6, -1) -- node [above] {\scriptsize } (1.6, -1);
+			\draw[|-|] (0.6, -1.5) -- node [above] {\scriptsize } (1.6, -1.5);
+			\draw[|-|] (1.8 , -0.5) -- node [above] {\scriptsize } (2.8, -0.5);
+			\draw[|-|] (3.0 , -0.5) -- node [above] {\scriptsize } (4.0, -0.5);
+			\draw[|-|] (3.0 , -1) -- node [above] {\scriptsize } (4.0, -1);
+			\draw[|-|] (3.0 , -1.5) -- node [above] {\scriptsize } (4.0, -1.5);
+		\end{tikzpicture}
+		\caption{}\label{fig:counterexample3}
+	\end{subfigure}
+	\caption{贪心反例}\label{fig:counterexample}
+\end{figure}
 
 \paragraph*{反例}
 在本题中，我们可以选择的贪心策略有很多，以下三种均是贪心策略，但是并不能取得最优结果，说明如下。
@@ -34,6 +73,22 @@
 	\item 选择冲突最少的区间，反例如\autoref{fig:counterexample3}
 \end{enumerate}
 
+
+
+\begin{figure}[hbt!]
+		\centering
+		\begin{tikzpicture}
+			\draw[|-|] (0, 0) -- node [above] {\scriptsize 3}  (3, 0);
+			\draw[|-|] (5, 0) -- node [above] {\scriptsize 6}  (6, 0);
+			\draw[|-|] (0.3, -0.5) -- node [above] {\scriptsize 1 }  (1.3, -0.5);
+			\draw[|-|] (1.5, -0.5) -- node [above] {\scriptsize 2 }  (2.5, -0.5);
+			\draw[|-|] (3.1, -0.5) -- node [above] {\scriptsize 7 } (6.5, -0.5);
+			\draw[|-|] (0.9, -1) -- node [above] {\scriptsize 4 } (3.6, -1);
+			\draw[|-|] (3.8, -1) -- node [above] {\scriptsize 5 } (4.4, -1);
+			\draw[|-|] (5.6 , -1) -- node [above] {\scriptsize 8 } (7, -1);
+		\end{tikzpicture}
+	\caption{任务区间}\label{fig:example22}
+\end{figure}
 \newpage
 因此，贪心策略的选取并不是随便的，而是需要依据对应的情况，例如\autoref{fig:example22}，为了有更多的区间能被选中，从前往后看，每执行一个任务，我们需要使能够使用时间的开始时间尽量早，才能选取尽量好的下一个任务。该贪心策略说明如下。
 
@@ -58,7 +113,7 @@
 \section{任务调度问题}
 \begin{example}
 	给定$n$个任务，对于第$i$个任务，给定完成该任务所需要的时间$t_i$和
-	该任务的截止时间$d_i$,总体开始时间$S=0$，要求找出\forall任务$i$,
+	该任务的截止时间$d_i$,总体开始时间$S=0$，要求找出$\forall$任务$i$,
 	给定一个时间段$[s_i,f_i]$，其中$f_i - s_i = t_i$，且$s_i\geqslant s$
 
 	\begin{equation}
