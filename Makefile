@@ -17,7 +17,7 @@ TEX=\
 	$(SRC)/Ln06-MST.tex\
 	$(SRC)/Ln07-redblue.tex\
 	$(SRC)/Ln26-P-NP.tex\
-	$(SRC)/Proof-of-Statute\
+	$(SRC)/Proof-of-Statute.tex\
 
 all: book.pdf
 .PHONY: all clean dev clean-all
