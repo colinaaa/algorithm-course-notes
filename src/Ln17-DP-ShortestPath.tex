@@ -33,14 +33,14 @@ min( \omega (p) : u\stackrel{p}{\longrightarrow} v )  & uv\text{连通} \notag\\
 \begin{lstlisting}[caption=初始化和松弛伪代码]
 INITIALIZE-SINGLE-SOURCE(G,s)
 for each vertex v in G.V
-         v.d=$\infty$
+    v.d=$\infty$
     v.f=NULL
 s.d=0
 
 RELAX(u,v)
 if v.d>u.d+(u,v)
-       v.d=u.d+(u,v)
-	   v.f=u
+    v.d=u.d+(u,v)
+    v.f=u
 \end{lstlisting}
 
 \section{Dijkstra算法}
@@ -56,10 +56,9 @@ S=NULL
 Q=G.V
 while Q!=NULL
         u=EXTRACT-MIN(Q)
-		S=S+u
-		for each vertex v in G.Adj[u]
-		         RELAX(u,v)
-
+	S=S+u
+	for each vertex v in G.Adj[u]
+		 RELAX(u,v)
 \end{lstlisting}
 
 算法运行过程如下：
@@ -108,16 +107,16 @@ BELLMAN-FORD(G,s)
 INITIALIZE-SINGLE-SOURCE(G,s)
 for i=1 to |G.V|-1
         for each edge(u,v) in G.E
-		         RELAX(u,v)
+            RELAX(u,v)
 for each edge(u,v) in G.E
-         if v.d>u.d+(u,v)
-		       return FALSE
+        if v.d>u.d+(u,v)
+            return FALSE
 return TRUE
 
 \end{lstlisting}
 
 \subsection{时间复杂度}
-算法第1行初始化操作所需时间为$\Theta (V)$，第2到4行循环的运行时间为$\Theta (E)$，且一共要进行|V|-1次循环，第5到7行的for循环所需时间为O(E),Bellman-Ford算法的总运行时间为O(VE)。
+算法第1行初始化操作所需时间为$\Theta (V)$，第2到4行循环的运行时间为$\Theta (E)$，且一共要进行|V|-1次循环，第5到7行的for循环所需时间为$O(E)$,Bellman-Ford算法的总运行时间为$O(VE)$。
 
 \subsection{正确性证明}
 若某节点和源点不连通，初始化时，除了源点的距离为0外，其他节点的初始化为无穷大。如果不连通，则该节点所在的连通图的任一条边都不会导致更新。
