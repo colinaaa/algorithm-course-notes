@@ -1,5 +1,5 @@
 \chapter{近似算法}
-\raggedright%网络流之图像分割的老哥用了个\centering害人不浅
+
 \begin{introduction}
 	\item 近似算法介绍
 	\item 顶点覆盖
@@ -68,10 +68,9 @@
 
 \subsection{正确性证明}
 
-\begin{proposition}{求证}{proof1:15Ln}
+\begin{proof}{}{proof1:15Ln}
 该算法始终有$ALG\leqslant 2\cdot OPT$，在该问题中OTP即为最优解点的数量，ALG即为算法求解的点的数量。
-\end{proposition}
-证明：
+\end{proof}
 \begin{enumerate}
 	\item 证明$OPT\geqslant |M|$（其中|M|为极大匹配的边数）:对于M中任意一条边，其必定至少有一点在OPT中，否则这条边就未被覆盖，与顶点覆盖的要求矛盾。故$OPT\geqslant |M|$
 	\item 证明$ALG=2\cdot |M|$:极大匹配中任意一点度为1，故点的数量即为边的数量的两倍，得证$ALG=2\cdot |M|$。
@@ -284,13 +283,13 @@
 	\begin{table}[]
 	\begin{tabular}{cccccccc}
 	\hline
-	$M_1$                  & $M_2$                  & $M_3$                   & $M_4$                   & ...                                       & $M_{m-1}$            & $M_m$                & m的奇偶性 \\ \hline
-	\multirow{2}{*}{$2m$}  & \multirow{2}{*}{$2m$}  & \multirow{2}{*}{$2m-1$} & \multirow{2}{*}{$2m-1$} & \multicolumn{1}{c|}{\multirow{2}{*}{...}} & $2m-\frac{m}{2}+1$   & $2m-\frac{m}{2}+1$   & 偶数m   \\ \cline{6-8} 
-						   &                        &                         &                         & \multicolumn{1}{c|}{}                     & $2m-\frac{m+1}{2}+2$ & $2m-\frac{m+1}{2}+1$ & 奇数m   \\ \hline
-	\multirow{2}{*}{$m+1$} & \multirow{2}{*}{$m+1$} & \multirow{2}{*}{$m+2$}  & \multirow{2}{*}{$m+2$}  & \multicolumn{1}{c|}{\multirow{2}{*}{...}} & $2m-\frac{m}{2}$     & $2m-\frac{m}{2}$     & 偶数m   \\ \cline{6-8} 
-						   &                        &                         &                         & \multicolumn{1}{c|}{}                     & $2m-\frac{m+1}{2}$   & $2m-\frac{m+1}{2}+1$ & 奇数m   \\ \hline
-	$m$                    &                        &                         &                         &                                           &                      &                      &       \\ \hline
-	4m+1                   & 3m+1                   & 3m+1                    & 3m+1                    & ...                                       & 3m+1                 & 3m+1                 &      
+	$M_1$					&	$M_2$					&	$M_3$					&	$M_4$					&	...											&	$M_{m-1}$			&	$M_m$				&	m的奇偶性	\\ \hline
+	\multirow{2}{*}{$2m$}	&	\multirow{2}{*}{$2m$}	&	\multirow{2}{*}{$2m-1$}	&	\multirow{2}{*}{$2m-1$}	&	\multicolumn{1}{c|}{\multirow{2}{*}{...}}	&	$2m-\frac{m}{2}+1$	&	$2m-\frac{m}{2}+1$	&	偶数m		\\ \cline{6-8} 
+							&							&							&							&	\multicolumn{1}{c|}{}						&	$2m-\frac{m+1}{2}+2$&	$2m-\frac{m+1}{2}+1$&	奇数m		\\ \hline
+	\multirow{2}{*}{$m+1$}	&	\multirow{2}{*}{$m+1$}	&	\multirow{2}{*}{$m+2$}	&	\multirow{2}{*}{$m+2$}	&	\multicolumn{1}{c|}{\multirow{2}{*}{...}}	&	$2m-\frac{m}{2}$	&	$2m-\frac{m}{2}$	&	偶数m		\\ \cline{6-8} 
+							&							&							&							&	\multicolumn{1}{c|}{}						&	$2m-\frac{m+1}{2}$	&	$2m-\frac{m+1}{2}+1$&	奇数m		\\ \hline
+	$m$						&							&							&							&												&						&						&				\\ \hline
+	4m+1					&	3m+1					&	3m+1					&	3m+1					&	...											&	3m+1				&	3m+1				&
 	\end{tabular}
 	\end{table}
 	
@@ -344,15 +343,13 @@
 
 \subsection{正确性证明}
 
-\begin{proposition}{求证}{proof2:15Ln}
+\begin{proof}{}{proof2:15Ln}
 	该算法得到的解是一个顶点覆盖
-\end{proposition}
-证明：
+\end{proof}
 	因为$\forall e=(u,v)\epsilon E,x_v^*+x_u^*\geqslant 1$，故$x_v^*\geqslant 0.5$或$x_u^*\geqslant 0.5$，故$x_v$和$x_u$至少有一个为1，即至少有一点覆盖该边e。得证该算法得到的解是一个顶点覆盖。
-\begin{proposition}{求证}{proof3:15Ln}
+\begin{proof}{}{proof3:15Ln}
 	$ALG\leqslant 2\cdot OPT$
-\end{proposition}
-证明：
+\end{proof}
 	$OPT\geqslant \sum\limits_{v\epsilon G} x_v^*w_v^*$，而又有$x_v\leqslant 2\cdot x_v^*$，故有
 	$ALG=\sum\limits_{v\epsilon G} x_vw_v\leqslant 2\cdot \sum\limits_{v\epsilon G} x_v^*w_v^*\leqslant 2\cdot OPT$，得证。
 
@@ -388,8 +385,10 @@
 	\item 故有$E(ALG)=E(\sum\limits_{i=1}^n C_i)=\sum\limits_{i=1}^n E(C_i)=n\cdot (1-\frac{1}{2^K})$
 	\item 又由$ALG\leqslant OTP\leqslant n$
 	\item 可得$\frac{E(ALG)}{OPT}\geqslant \frac{E(ALG)}{n}=1-\frac{1}{2^K}\geqslant 0.5$
-	\item 注意这里的分子并不是ALG，而是ALG的期望
 \end{itemize}
+\begin{remark}
+	这里的分子并不是ALG，而是ALG的期望
+\end{remark}
 
 \subsection{确定性贪心算法}
 
