@@ -7,12 +7,18 @@ TEX=\
 	$(SRC)/Ln9-NearestPoints.tex\
 	$(SRC)/Ln11-LargeIntegerMultiplication.tex\
 	$(SRC)/dynamic-programming-1.tex\
+	$(SRC)/LN16.tex\
+	$(SRC)/Ln17-DP-ShortestPath.tex\
 	$(SRC)/Ln18-DP-ZeroOneKnapsack.tex\
 	$(SRC)/Ln19-DP-ContextFreeGrammar.tex\
 	$(SRC)/Network-flows.tex\
 	$(SRC)/Image-segmentation.tex\
+	$(SRC)/Greedy-algorithm.tex\
+	$(SRC)/Ln15-ApproximationAlgorithm.tex\
+	$(SRC)/Ln06-MST.tex\
+	$(SRC)/Ln07-redblue.tex\
 	$(SRC)/Ln26-P-NP.tex\
-	$(SRC)/Proof-of-Statute\
+	$(SRC)/Proof-of-Statute.tex\
 
 all: book.pdf
 .PHONY: all clean dev clean-all
