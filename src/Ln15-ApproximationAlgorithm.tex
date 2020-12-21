@@ -68,7 +68,7 @@
 
 \subsection{正确性证明}
 
-\begin{proof}{}{proof1:15Ln}
+\begin{proof}
 该算法始终有$ALG\leqslant 2\cdot OPT$，在该问题中OTP即为最优解点的数量，ALG即为算法求解的点的数量。
 \end{proof}
 \begin{enumerate}
@@ -343,11 +343,11 @@
 
 \subsection{正确性证明}
 
-\begin{proof}{}{proof2:15Ln}
+\begin{proof}
 	该算法得到的解是一个顶点覆盖
 \end{proof}
 	因为$\forall e=(u,v)\epsilon E,x_v^*+x_u^*\geqslant 1$，故$x_v^*\geqslant 0.5$或$x_u^*\geqslant 0.5$，故$x_v$和$x_u$至少有一个为1，即至少有一点覆盖该边e。得证该算法得到的解是一个顶点覆盖。
-\begin{proof}{}{proof3:15Ln}
+\begin{proof}
 	$ALG\leqslant 2\cdot OPT$
 \end{proof}
 	$OPT\geqslant \sum\limits_{v\epsilon G} x_v^*w_v^*$，而又有$x_v\leqslant 2\cdot x_v^*$，故有
