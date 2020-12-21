@@ -1,0 +1,181 @@
+\chapter{贪心算法}
+
+\begin{introduction}
+	\item 区间调度问题
+	\item 任务调度问题
+	\item 另一个任务调度问题
+\end{introduction}
+
+
+\section{概述}
+\begin{definition}{贪心算法}
+    在迭代的每一步根据某种规则取局部最优算法称为贪心算法。对同一个问题可能有许多贪心策略，每种策略有不同的规则，得到的结果也可能不同。
+    \\贪心算法主要使用交换法证明，即对任意假定的结果，逐步经过交换，每一步都使新的结果不差于原有的结果，最终得到经过选择的策略求出的解。由此证明经该策略得到的解是最优解。
+\end{definition}
+
+
+
+\section{区间调度问题}
+\begin{example}
+    给定区间$I_1, I_2, \ldots, I_n$，
+	$s_i$为$I_i$开始时间，$f_i$为$I_i$的结束时间（$f_i>s_i$），$I_j=[s_j,f_j]$
+	\\目标：选出尽量多的区间，使两两互不重叠。
+\end{example}
+
+\subsection{算法设计}
+\begin{figure}[hbt!]
+	\centering
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\draw[|-|] (0, 0) -- node [above] {\scriptsize } (1, 0);
+			\draw[|-|] (1.2,0) -- node [above] {\scriptsize } (2.2,0);
+			\draw[|-|] (0.5 , -0.5) -- node  [above] {\scriptsize } (1.5, -0.5);
+		\end{tikzpicture}
+		\caption{}\label{fig:counterexample1}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\draw[|-|] (0, 0) -- node [above] {\scriptsize }  (2.5, 0);
+			\draw[|-|] (0.3, -0.5) -- node [above] {\scriptsize } (0.7, -0.5);
+			\draw[|-|] (0.8, -0.5) -- node [above] {\scriptsize } (1.5, -0.5);
+			\draw[|-|] (1.6, -0.5) -- node [above] {\scriptsize } (2.0, -0.5);
+		\end{tikzpicture}
+		\caption{}\label{fig:counterexample2}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\draw[|-|] (0, 0) -- node [above] {\scriptsize }  (1, 0);
+			\draw[|-|] (1.2, 0) -- node [above] {\scriptsize }  (2.2, 0);
+			\draw[|-|] (2.4, 0) -- node [above] {\scriptsize }  (3.4, 0);
+			\draw[|-|] (3.6, 0) -- node [above] {\scriptsize }  (4.4, 0);
+			\draw[|-|] (0.6, -0.5) -- node [above] {\scriptsize } (1.6, -0.5);
+			\draw[|-|] (0.6, -1) -- node [above] {\scriptsize } (1.6, -1);
+			\draw[|-|] (0.6, -1.5) -- node [above] {\scriptsize } (1.6, -1.5);
+			\draw[|-|] (1.8 , -0.5) -- node [above] {\scriptsize } (2.8, -0.5);
+			\draw[|-|] (3.0 , -0.5) -- node [above] {\scriptsize } (4.0, -0.5);
+			\draw[|-|] (3.0 , -1) -- node [above] {\scriptsize } (4.0, -1);
+			\draw[|-|] (3.0 , -1.5) -- node [above] {\scriptsize } (4.0, -1.5);
+		\end{tikzpicture}
+		\caption{}\label{fig:counterexample3}
+	\end{subfigure}
+	\caption{贪心反例}\label{fig:counterexample}
+\end{figure}
+
+\paragraph*{反例}
+在本题中，我们可以选择的贪心策略有很多，以下三种均是贪心策略，但是并不能取得最优结果，说明如下。
+
+\begin{enumerate}
+	\item 以时间最短排序，反例如\autoref{fig:counterexample1}
+	\item 以开始时间最早排序，反例如\autoref{fig:counterexample2}
+	\item 选择冲突最少的区间，反例如\autoref{fig:counterexample3}
+\end{enumerate}
+
+
+
+\begin{figure}[hbt!]
+		\centering
+		\begin{tikzpicture}
+			\draw[|-|] (0, 0) -- node [above] {\scriptsize 3}  (3, 0);
+			\draw[|-|] (5, 0) -- node [above] {\scriptsize 6}  (6, 0);
+			\draw[|-|] (0.3, -0.5) -- node [above] {\scriptsize 1 }  (1.3, -0.5);
+			\draw[|-|] (1.5, -0.5) -- node [above] {\scriptsize 2 }  (2.5, -0.5);
+			\draw[|-|] (3.1, -0.5) -- node [above] {\scriptsize 7 } (6.5, -0.5);
+			\draw[|-|] (0.9, -1) -- node [above] {\scriptsize 4 } (3.6, -1);
+			\draw[|-|] (3.8, -1) -- node [above] {\scriptsize 5 } (4.4, -1);
+			\draw[|-|] (5.6 , -1) -- node [above] {\scriptsize 8 } (7, -1);
+		\end{tikzpicture}
+	\caption{任务区间}\label{fig:example22}
+\end{figure}
+\newpage
+因此，贪心策略的选取并不是随便的，而是需要依据对应的情况，例如\autoref{fig:example22}，为了有更多的区间能被选中，从前往后看，每执行一个任务，我们需要使能够使用时间的开始时间尽量早，才能选取尽量好的下一个任务。该贪心策略说明如下。
+
+令$Q=\{I_1, I_2, \ldots, I_n\},R=\varnothing$
+
+\begin{enumerate}
+    \item 对$Q$中$I_1, I_2, \ldots, I_n$以结束时间由小到大排序
+    \item 每次将Q中有最小结束时间且不与R中区间冲突的区间$I_i$加入R，将$I_i$从Q中移除，循环往复，直到无法加入为止
+\end{enumerate}
+
+\subsection{算法分析}
+\paragraph*{正确性证明}
+\begin{itemize}
+    \item 假定有一个更好的解$OPT'$,对其中的每一个区间进行排序，为$J_1‘,J_2',\ldots,J_n'$，而上面给出的贪心解为$J_1,J_2,\ldots,J_n$。
+    \item 从$i=1$开始置换将$OPT'$中的$J_i'置换为J_i$根据我们贪心策略的定义，易得$OPT'$中的区间依然不会冲突而且区间数维持不变。
+    \item 完成$OPT'$区间最后一个区间的置换后可知贪心解$OPT$的区间数$\geq OPT'$解的区间数
+\end{itemize}
+
+\paragraph*{复杂度}
+该算法的时间复杂度即为排序所用时间的复杂度$O(nlogn)$，空间复杂度为$O(n)$。
+
+\section{任务调度问题}
+\begin{example}
+	给定$n$个任务，对于第$i$个任务，给定完成该任务所需要的时间$t_i$和
+	该任务的截止时间$d_i$,总体开始时间$S=0$，要求找出$\forall$任务$i$,
+	给定一个时间段$[s_i,f_i]$，其中$f_i - s_i = t_i$，且$s_i\geqslant s$
+
+	\begin{equation}
+		s.t. \forall \space l_i = \begin{cases}
+			f_i - d_i & f_i > d_i    \\
+			0        & f_i \leqslant d_i
+		\end{cases}
+	\end{equation}
+	\\目标：令$L =\max(l_i)$，算法给出的L最小。
+\end{example}
+
+\subsection{算法设计}
+\paragraph*{贪心策略选择}
+为了使最大子任务超时时间最短，一个比较自然的贪心思路是让截止时间早的任务优先执行。
+
+\begin{remark}
+    假设对任意的任务截止时间$d_i \neq d_j$
+\end{remark}
+
+\subsection{算法分析}
+
+\paragraph*{贪心策略正确性证明}
+\begin{enumerate}
+    \item 假定存在一个其他策略产生的结果$OPT'$结果比我们的贪心策略结果$OPT$更好。
+    \item 那么$OPT'$中的任务序列必然有逆序,否则会与$OPT$结果相同，假设该逆序组合任务序号为$i$与$i+1$,其中$f_i>f_{i+1}$。
+    \item 我们现在把它调成顺序，即对他们的位置做交换，显然，这并不会影响他们前后的超时时间。假定他们的开始时间为$S$,消耗时间分别为$t_i$和$t_{i+1}$。对于$i$任务，之前的超时时间为$S+t_i-d_i$，之后的超时时间为$S+t_i+t_{i+1}-d_i$。对于$i+1$号任务，之前的超时时间为$S+t_i+t_{i+1}-d_{i+1}$，之后的超时时间为$S+t_{i+1}-d_{i+1}$。
+    \item 根据我们的假设$d_{i+1}<d_i$。易得$S+t_i+t_{i+1}-d_i<S+t_i+t_{i+1}-d_{i+1}$且$S+t_{i+1}-d_{i+1}<S+t_i-d_i$。即调换后$i+1$号任务的超时时间小于调换前$i$号任务的超时时间，调换后$i$号任务的超时时间小于调换前$i+1$号任务的超时时间。那么这两个任务的超时时间的最大值一定比原来的小，而其他任务的超时时间并未改变，也就是经过这样的变换后得到的新解$OPT'' \leq OPT'$。
+    \item 对$OPT'$的序列进行冒泡排序可以得到经过我们贪心策略得到的$OPT$，经过4的推导，我们能得出$OPT \leq OPT'$。故我们的策略正确。
+\end{enumerate}
+
+\paragraph*{复杂度}
+本算法仍旧是一个对序列某个性质进行排序的算法，时间复杂度为O($nlogn$)。空间复杂度为$O(n)$。
+
+\section{另一个任调度问题}
+\begin{example}
+    有$n$个任务，每个任务有它的权重$w_i$，以及完成任务需要的时间$t_i$。定义任务$i$的完成时间为$c_i$。要求设置任务的执行顺序使$M = \sum_{i=1}^n {w_ic_i}$最小。
+\end{example}
+
+\subsection{算法设计}
+
+\paragraph*{贪心策略的选择}
+这道题要贪心的东西有点类似任务的密度，即$\frac{w_i}{t_i}$。一个自然的想法是将$\frac{w_i}{t_i}$大的排在前面。
+
+\subsection{算法分析}
+
+\paragraph*{贪心策略正确性的证明}
+本例同前一个任务调度的基本思路相同，即证明将逆序的组合($\frac{w_i}{t_i} < \frac{w_{i+1}}{t_{i+1}}$)换成顺序的组合后$M$变小了。
+
+\begin{enumerate}
+    \item 对逆序$(i,i+1)$，假设开始时间为$T_0$,仅对这两项计算代价（调换他们的顺序并不会对前后产生影响）。定义对每一项任务而言代价为$w_ic_i$。
+    \item 进过简单的计算，调换前的代价为$x$，调换之后的代价为$y$。
+    \begin{equation}
+        x=(T_0+t_i)w_i+(T_0+t_i+t_{i+1})w_{i+1}
+    \end{equation}
+    \begin{equation}
+        y=(T_0+t_{i+1})w_{i+1}+(T_0+t_i+t_{i+1})w_i
+    \end{equation}
+    \begin{equation}
+        x-y=t_iw_{i+1}-t_{i+1}w_i
+    \end{equation}
+    \item 我们已知$\frac{w_i}{t_i} < \frac{w_{i+1}}{t_{i+1}}$，由于这四个数都大于0，所以$2.4$式显然成立，故调换顺序后代价小于于原逆序代价。贪心策略正确。
+\end{enumerate}
+
+\paragraph*{复杂度}
+本算法仍旧是一个对序列某个性质进行排序的算法，时间复杂度为O($nlogn$)。空间复杂度为$O(n)$。

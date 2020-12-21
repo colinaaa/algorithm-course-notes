@@ -13,6 +13,7 @@ TEX=\
 	$(SRC)/Ln19-DP-ContextFreeGrammar.tex\
 	$(SRC)/Network-flows.tex\
 	$(SRC)/Image-segmentation.tex\
+	$(SRC)/Greedy-algorithm.tex\
 	$(SRC)/Ln15-ApproximationAlgorithm.tex\
 	$(SRC)/Ln06-MST.tex\
 	$(SRC)/Ln07-redblue.tex\
