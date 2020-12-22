@@ -6,7 +6,6 @@
 	\item 优化
 	\item 其他值得关注的点
 	\item 分治思路
-	
 \end{introduction}
 
 \section{问题引入}
@@ -22,7 +21,7 @@
 这样我们得到了两个小一点的序列。为了后文的叙述方便，我们称在  t a g  左 侧的序列为  $N_{l}$,  长度为  $\left|N_{l}\right|$,  在$ \operatorname{tag}$ 右侧的序列为 $N_{r}$,  长度为$  \left|N_{r}\right|$ 。
 到这一步，我们将问题拆解为如下三种情况:
 $$
-\text {question}(N, k)=\left\{\begin{aligned}
+\text {question}(N, k)=\left\ {\begin{aligned}
 \text {question}\left(N_{l}, k\right) ,&\left|N_{l}\right|>=k \\
 \text {tag} ,&\left|N_{l}\right|=k-1 \\
 \text {question}\left(N_{r}, k-\left|N_{l}\right|-1\right) ,&\left|N_{l}\right|<k-1
@@ -57,7 +56,7 @@ $$\left|N_{l}\right|  $$
 
 $$\frac{1}{4}|N| \leq\left|N_{l}\right| \leq \frac{3}{4}|N|$$
 
-这样每次操作至少将问题规模缩小为原来的  \frac{3}{4} \circ  于是有:
+这样每次操作至少将问题规模缩小为原来的$\frac{3}{4}\circ$于是有:
 
 $$T(n) \leq T\left(\frac{3}{4} n\right)+n$$
 
@@ -81,7 +80,7 @@ $$O\left(n^{2}\right)$$
   \caption{模仿快速排序}\label{fig:nearestpoints-divide}
 \end{figure}
 
-这样一来，X部分的数一定都大于mm, 而W  部分的数一定都小于  m m  。 所以，每次操作至少有  \frac{3 n-6}{10}  个元素被易除，即最多只剩  $\frac{7 n+6}{10} $ 个元素。
+这样一来，X部分的数一定都大于mm, 而W  部分的数一定都小于  m m  。 所以，每次操作至少有  $\frac{3 n-6}{10}$  个元素被易除，即最多只剩  $\frac{7 n+6}{10} $ 个元素。
 第一次组内取中时，每组消耗常数时间，共有  $ \frac{n}{5} $  组，因此第一次取中的时 间复杂度为  $ c n \in O(n) $ （ c  为某常数  ) 。  第二次中位数序列取中，实质上等价 于问题 
 $\text { question }\left(N_{m}, \frac{\left|N_{m}\right|}{2}\right)$,
 ($N_{m}$为中位数序列)而  $ \left|N_{m}\right|=\frac{n}{5} $ ,  所以， 可 以写出优化后的算法时间复杂度递推式:
@@ -104,17 +103,14 @@ $$
 $$
 T\left(\frac{n}{5}\right) \leq 4 c n \\
 $$
-\text { 所以 } \\
 $$
+ \text{ 所以 }
  T\left(\frac{3}{4}\right) n \leq 15 c n
-
 $$
-
-\text { 得证，这样，在加入两次取中法后，我们的算法就能够保证时间复杂度为}
-$ O(n)$
-
-\text { 级别 } \\
-
+\text{ 得证，这样，在加入两次取中法后，我们的算法就能够保证时间复杂度为}
+O(n)
+\text{ 级别 } \\
+$$
 \section{其它值得关注的点}
 两次取中的间值
 在优化中，从式 推导到式时，我们假设  n  足够大，那么  n  到底要有多大 才适合使用两次取中法呢?
@@ -122,10 +118,7 @@ $ O(n)$
 $$
 \frac{7 n+6}{10} \leq\left\lfloor\frac{3}{4} n\right\rfloor
 $$
-解得
-$$
-n \geq 44
-$$
+解得$n \geq 44$
 所以，当递归到数据规模小于 44 时，便可不用两次取中法来取  t a g 了 。 
 两次取中的分组大小
 当数据规模较大时，两次取中法的分组大小会明显影响程序运行时间，下图 是一次实验结果的截图，时间单位为秒。
