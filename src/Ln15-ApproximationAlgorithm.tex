@@ -106,7 +106,7 @@
 	\KwResult{the minimum $T_1^*$}
 	\Begin{
 		Start with no tasks assigned\\
-		Set $T_i=0$ and $A(i)=\{\}$ for all machines $M_i$
+		Set $T_i=0$ and $A(i)=\{\}$ for all machines $M_i$\\
 		\ForEach{$j \in [1,n]$}{
 			Let $M_i$ be a machine which $T_i$ the minimum at present\\
 			Aissign task j to machine $M_i$\\
@@ -117,12 +117,12 @@
 	\caption{Greedy-Algorithm1}\label{greedy1-algo}
 \end{algorithm}
 
-该算法在所给出的例子中运行的结果如下图所示，这里给出的近似解为$T_1^*=6+2=8$
 \begin{figure}[hbt]
 	\centering
-	\includegraphics{image/greedy1-result.jpg}
+	\includegraphics[scale=0.6]{image/greedy1-result.jpg}
 	\caption{贪心算法一的结果}\label{fig:greedy1-result}
 \end{figure}
+该算法在所给出的例子中运行的结果如\autoref{fig:greedy1-result}所示，这里给出的近似解为$T_1^*=6+2=8$
 
 实际上我们可以证明，$T_1^*$和$T_0$有如下关系：
 \begin{equation*}
@@ -145,19 +145,19 @@
 	因此$T_0$会大于等于任一$t_i$。
 \end{theorem}
 
-进一步假设由该贪婪算法所得到的$T_1^*$由第i台机器产生，如下图所示
 \begin{figure}[hbt]
 	\centering
-	\includegraphics{image/greedy1-proof.jpg}
+	\includegraphics[scale=0.6]{image/greedy1-proof.jpg}
 	\caption{贪心算法一近似比的证明}\label{fig:greedy1-proof}
 \end{figure}
+进一步假设由该贪婪算法所得到的$T_1^*$由第i台机器产生，如\autoref{fig:greedy1-proof}所示
 
 \begin{proof}
-	由定理2可知，最上面的那个任务$t_i$的执行时间不会比$T_0$更大，即
+	由定理\ref{thm:label-for-the2}可知，最上面的那个任务$t_i$的执行时间不会比$T_0$更大，即
 	\begin{equation*}
 		t_i \leq \max_j t_j \leq T_0
 	\end{equation*}
-	而$M_i$是所执行的剩下任务的总时间，根据贪婪算法的执行的策略，会导致在使$M_i$执行最上面的那个任务之前，剩下的任务的时间之和是最小的，由定理1可知，该部分时间和不会超过$T_0$，即
+	而$M_i$是所执行的剩下任务的总时间，根据贪婪算法的执行的策略，会导致在使$M_i$执行最上面的那个任务之前，剩下的任务的时间之和是最小的，由定理\ref{thm:label-for-the1}可知，该部分时间和不会超过$T_0$，即
 	\begin{equation*}
 		M_i \leq AVG \leq T_0
 	\end{equation*}
@@ -175,8 +175,8 @@
 	\Begin{
 		Start with no tasks assigned\\
 		Sort tasks in decreasing order of processing time $t_j$ \\
-		Assume that $t_1 \geq t_2 \geq \ldots \geq t_n$
-		Set $T_i=0$ and $A(i)=\{\}$ for all machines $M_i$
+		Assume that $t_1 \geq t_2 \geq \ldots \geq t_n$\\
+		Set $T_i=0$ and $A(i)=\{\}$ for all machines $M_i$\\
 		\ForEach{$j \in [1,n]$}{
 			Let $M_i$ be a machine which $T_i$ the minimum at present\\
 			Aissign task j to machine $M_i$\\
@@ -187,24 +187,24 @@
 	\caption{Greedy-Algorithm2}\label{greedy2-algo}
 \end{algorithm}
 
-该算法在所给出的例子中运行的结果如下图所示，这里给出的近似解为$T_2^*=3+2+2=7$
 \begin{figure}[hbt]
 	\centering
-	\includegraphics{image/greedy2-result.jpg}
+	\includegraphics[scale=0.6]{image/greedy2-result.jpg}
 	\caption{贪心算法二的结果}\label{fig:greedy2-result}
 \end{figure}
+该算法在所给出的例子中运行的结果如\autoref{fig:greedy2-result}所示，这里给出的近似解为$T_2^*=3+2+2=7$
 
 实际上我们可以证明，$T_2^*$和$T_0$有如下关系：
 \begin{equation*}
 	T_1^*\leq \frac{3}{2} T_0
 \end{equation*}
 
-进一步假设由该贪婪算法所得到的$T_2^*$由第i台机器产生，如下图所示
 \begin{figure}[hbt]
 	\centering
-	\includegraphics{image/greedy2-proof.jpg}
+	\includegraphics[scale=0.6]{image/greedy2-proof.jpg}
 	\caption{贪心算法二近似比的证明}\label{fig:greedy2-proof}
 \end{figure}
+进一步假设由该贪婪算法所得到的$T_2^*$由第i台机器产生，如\autoref{fig:greedy2-proof}所示
 
 \begin{proof}
 	首先，如果任务数$n$小于等于机器数$m$，那么显然有$T_2^*=T_0$，结论成立。
@@ -218,7 +218,7 @@
 	\begin{equation*}
 		t_i \leq t_{m+1} \leq \frac{1}{2}T_0
 	\end{equation*}
-	而$M_i$是所执行的剩下任务的总时间，根据贪婪算法的执行的策略，会导致在使$M_i$执行最上面的那个任务之前，剩下的任务的时间之和是最小的，由定理1可知，该部分时间和不会超过$T_0$，即
+	而$M_i$是所执行的剩下任务的总时间，根据贪婪算法的执行的策略，会导致在使$M_i$执行最上面的那个任务之前，剩下的任务的时间之和是最小的，由定理\ref{thm:label-for-the1}可知，该部分时间和不会超过$T_0$，即
 	\begin{equation*}
 		M_i \leq AVG \leq T_0
 	\end{equation*}
@@ -235,12 +235,12 @@
 
 此处下确界的含义是，不可能再找到一个比它更小的正数满足上式。
 
-进一步假设由该贪婪算法所得到的$T_2^*$由第i台机器产生，如下图所示
 \begin{figure}[hbt]
 	\centering
-	\includegraphics{image/greedy2-proof-4-3.jpg}
+	\includegraphics[scale=0.6]{image/greedy2-proof-4-3.jpg}
 	\caption{贪心算法二近似比的证明}\label{fig:greedy2-proof-4-3}
 \end{figure}
+进一步假设由该贪婪算法所得到的$T_2^*$由第i台机器产生，如\autoref{fig:greedy2-proof-4-3}所示
 
 \begin{proof}
 	首先，如果任务数$n$小于等于机器数$m$，那么显然有$T_2^*=T_0$，结论成立。
@@ -254,7 +254,7 @@
 	\begin{equation*}
 		t_i \leq t_{2m+1} \leq \frac{1}{3}T_0
 	\end{equation*}
-	而$M_i$是所执行的剩下任务的总时间，根据贪婪算法的执行的策略，会导致在使$M_i$执行最上面的那个任务之前，剩下的任务的时间之和是最小的，由定理1可知，该部分时间和不会超过$T_0$，即
+	而$M_i$是所执行的剩下任务的总时间，根据贪婪算法的执行的策略，会导致在使$M_i$执行最上面的那个任务之前，剩下的任务的时间之和是最小的，由定理\ref{thm:label-for-the1}可知，该部分时间和不会超过$T_0$，即
 	\begin{equation*}
 		M_i \leq AVG \leq T_0
 	\end{equation*}
@@ -268,16 +268,17 @@
 \begin{example}
 	假设有$2m+1$个任务，执行时间分别为$m$到$2m$和$m+1$到$2m$，求解贪心算法二的近似比。
 \end{example}
-该问题的特殊性使得其最优解可以凭直觉得到为$3m+2$，调度策略如下图所示。
+
 \begin{figure}[hbt]
 	\centering
-	\includegraphics{image/example-problem-opt-solve.jpg}
+	\includegraphics[scale=0.6]{image/example-problem-opt-solve.jpg}
 	\caption{最优解调度}\label{fig:example-problem-opt-solve}
 \end{figure}
+该问题的特殊性使得其最优解可以凭直觉得到为$3m+2$，调度策略如\autoref{fig:example-problem-opt-solve}所示。
 
 而利用贪婪算法二得出的近似解$T_2^*$则为$4m+1$，证明如下。
 \begin{proof}
-	贪心算法二调度策略如下表所示。
+	贪心算法二调度策略如表格所示。
 	% Please add the following required packages to your document preamble:
 	% \usepackage{multirow}
 	\begin{table}[]
