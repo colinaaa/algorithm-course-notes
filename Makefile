@@ -19,7 +19,7 @@ TEX=\
 	$(SRC)/Ln07-redblue.tex\
 	$(SRC)/Ln26-P-NP.tex\
 	$(SRC)/Proof-of-Statute.tex\
-	$(SRC/network-flow-base.tex \
+	$(SRC)/network-flow-base.tex \
 
 all: book.pdf
 .PHONY: all clean dev clean-all
