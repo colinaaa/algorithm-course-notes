@@ -32,3 +32,22 @@ $$
 \end{figure}
 \subsection{假设 n 是 b 的整数次方}
 $T(n)=\Theta\left(n^{\log _{a} b}\right)+\sum_{j=0}^{\log _{b} n-1} a_{j} f\left(n / b^{j}\right)$\\
+(1)
+ $$
+ \begin{array}{l}
+f(n)=O\left(n^{l o g_{b} a-\epsilon}\right) \\
+g(n)=\sum_{j=0}^{\log _{b} n-1} a_{j} f\left(n / b^{j}\right) \\
+f\left(n / b^{j}\right)=O\left(\left(\frac{n}{b^{j}}\right)^{\log _{b} a-\epsilon}\right) \\
+c, n_{0}, \forall n \geq n_{0} \\
+\left.f\left(n / b^{j}\right) \leq c\left(\frac{n}{b^{j}}\right)^{l o g_{b} a-\epsilon}\right) \Rightarrow a^{j} f\left(n / b^{j}\right) \leq c a^{j}\left(\frac{n}{b^{j}}\right)^{\log _{b} a-\epsilon} \\
+a^{j} f\left(n / b^{j}\right) \leq c n^{\log _{b} a-\epsilon}\left(\frac{a}{b^{\log _{b} a-\epsilon}}\right)^{j} \\
+\Rightarrow a^{j} f\left(n / b^{j}\right) \leq c n^{\log _{b} a-\epsilon}\left(\frac{a b^{\epsilon}}{b^{\log _{b} a}}\right)^{j} \\
+\Rightarrow a^{j} f\left(n / b^{j}\right) \leq c n^{\log _{b} a-\epsilon}\left(b^{\epsilon}\right)^{j} \\
+g(n) \leq c n^{\log _{b} a-\epsilon} \sum_{j=0}^{\log _{b} a-1}\left(b^{\epsilon}\right)^{j} \\
+\Rightarrow \\g(n) \leq c n^{\log _{b} a-\epsilon} \frac{1\left(1-\left(b^{\epsilon}\right)^{l o g_{b} n}\right)}{1-b^{\epsilon}}
+\Rightarrow g(n) \leq c n^{\log _{b} a-\epsilon \frac{1-n^{\epsilon}}{1-b^{\epsilon}}} \\
+\Rightarrow g(n) \leq c \frac{n^{\log _{b} a-\epsilon}-n^{\log _{b} a}}{1-b^{\epsilon}} \\
+g(n)=O\left(n^{\log _{b} a}\right) \\
+T(n)=\Theta\left(n^{\log _{b} a}\right)+O\left(n^{\log _{b} a}\right)=\Theta\left(n^{\log _{b} a}\right)
+\end{array}
+ $$
