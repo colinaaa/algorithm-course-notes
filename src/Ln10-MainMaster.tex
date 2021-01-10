@@ -65,4 +65,32 @@ c_{1} n^{\log _{b} a}\left(\frac{a}{b^{\log _{b} a}}\right)^{j} \leq a^{j} f\lef
 g(n)=\Theta\left(n^{\log _{b} a} \lg n\right)
 \end{array}
 $$
- 
+(3)
+
+$$
+\begin{array}{l}
+f(n)=\Omega\left(n^{\log _{b} a+\epsilon}\right) \\
+c<1 \text { af }\left(\frac{n}{b}\right) \leq c f(n) \\
+g(n)=\sum_{j=0}^{\log _{b} n-1} a^{j} f\left(\frac{n}{b^{j}}\right) \\
+a f\left(\frac{n}{b}\right) \leq c f(n) \\
+\Rightarrow a^{j} f\left(\frac{n}{b^{j}}\right) \leq c^{j} f(n) \\
+\Rightarrow g(n) \leq \sum_{j=0}^{\log _{b} n-1} c^{j} f(n) \\
+\Rightarrow g(n) \leq \sum_{j=0}^{+\infty} c^{j} f(n)\\
+\Rightarrow g(n) \leq \frac{1}{1-c} f(n) \\
+g(n)=O(f(n))
+\end{array}
+$$
+
+\subsection{假设 n 不是 b 的整数次方}
+$T(n)=a T\left(\left\lfloor\frac{n}{b^{j}}\right\rfloor\right)+f(n) T(n)=a T\left(\left\lceil\frac{n}{b}\right\rceil\right)+f(n)$
+
+$$
+\begin{array}{c}
+a^{\left\lfloor\log _{b} n\right\rfloor}<a^{\log _{b} n}<a * a^{\left\lfloor\log _{b} n\right\rfloor}, \\\quad \Theta\left(a^{\left\lfloor\log _{b} n\right\rfloor}\right)=\Theta\left(a^{\log _{b} n}\right)\\T(n)= 
+\Theta\left(a^{\left\lfloor\log _{b} n\right\rfloor}\right)+\sum_{j=0}^{\left\lfloor\log _{b} n\right\rfloor-1} a^{j} f\left(n_{j}\right)\left(n_{j}=\left\lceil\frac{n}{b^{j}}\right\rceil\right) \\
+\cdot \frac{n}{b^{j}} \leq \quad\left[\frac{n}{b^{j}}\right\rceil \quad<\quad \frac{n}{b^{j}}+1\\ \quad  \quad  \left\lceil\frac{n}{b^{j}}\right\rceil\left(\Theta\left(\frac{n}{b^{j}}\right)=\right. 
+\left.\Theta\left(\left\lceil\frac{n}{b^{j}}\right\rceil\right)\right) 
+\end{array}
+$$
+
+
