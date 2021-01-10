@@ -64,7 +64,6 @@ $$T(n) \leq T\left(\frac{3}{4} n\right)+n$$
 由主定理得:
 
 $$T(n) \in O(n)$$
-
 \section{优化}
 在复杂度分析-最坏情况中我们提到的算法有着明显的缺陷，即在最坏情况 下，算法的时间复杂度可能是 
 $$O\left(n^{2}\right)$$
@@ -91,39 +90,4 @@ $$T(n) \in O(n)$$
 首先，根据  T(n)  的定义，  T(n)  是一个单调递增函数。当  n  足够大时，我 们可以对式 进行放缩，得到式
 $$T(n) \leq T\left(\frac{n}{5}\right)+T\left(\frac{3}{4} n\right)+O(n)$$
 根据 $ O(n) $ 的定义，式还 可写成
-$$T(n) \leq T\left(\frac{n}{5}\right)+T\left(\frac{3}{4} n\right)+c n$$
-其中  c  为某常数。接下来我们试图证明
-$$T(n) \leq 20 \mathrm{cn}$$
-我们知道 $ n=1 $ 时有
-$$T(n) \leq 20 \mathrm{cn} \quad(n=1)$$
-假设 $ n \leq k$  时式 也成立，那么当  $n=k+1$  时，有
-$$
-\frac{n}{5} \leq k \\
-\frac{3}{4} n \leq k
-$$
-
-
-
-\section{其它值得关注的点}
-两次取中的间值
-在优化中，从式 推导到式时，我们假设  n  足够大，那么  n  到底要有多大 才适合使用两次取中法呢?
-式 推到式需 要满足如下条件:
-$$
-\frac{7 n+6}{10} \leq\left\lfloor\frac{3}{4} n\right\rfloor
-$$
-解得
-$$
-n \geq 44
-$$
-所以，当递归到数据规模小于 44 时，便可不用两次取中法来取  t a g 了 。 
-两次取中的分组大小
-当数据规模较大时，两次取中法的分组大小会明显影响程序运行时间，下图 是一次实验结果的截图，时间单位为秒。
-\begin{figure}[h]
-	\begin{minipage}[t]{1\linewidth}
-		\centering
-		\includegraphics[width=10cm,height=3.5cm]{image/kth3.png}
-	\end{minipage}
-\end{figure}
-可以看到，适当的提高分组的大小能够增加程序运行的效率。
-
 
