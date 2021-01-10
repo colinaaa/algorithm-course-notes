@@ -75,3 +75,13 @@ $$O\left(n^{2}\right)$$
 2. 取出每一组的中位数。
 3. 查找上一步中所有中位数的中位数作为 tag，偶数个中位数的情况下 设定为选取中间较小的一个。
 直观上如下图所示:
+\begin{figure}[h]
+	\begin{minipage}[t]{1\linewidth}
+		\centering
+		\includegraphics[width=10cm,height=3.5cm]{image/kth2.png}
+	\end{minipage}
+\end{figure}
+这样一来，X部分的数一定都大于mm, 而W  部分的数一定都小于  m m  。 所以，每次操作至少有  $$\frac{3 n-6}{10} $$ 个元素被易除，即最多只剩  $\frac{7 n+6}{10} $ 个元素。
+第一次组内取中时，每组消耗常数时间，共有  $ \frac{n}{5} $  组，因此第一次取中的时 间复杂度为  $ c n \in O(n) $ （ c  为某常数  ) 。  第二次中位数序列取中，实质上等价 于问题 
+$\text { question }\left(N_{m}, \frac{\left|N_{m}\right|}{2}\right)$,
+($N_{m}$为中位数序列)而  $ \left|N_{m}\right|=\frac{n}{5} $ ,  所以， 可 以写出优化后的算法时间复杂度递推式:
