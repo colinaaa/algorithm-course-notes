@@ -51,3 +51,18 @@ g(n)=O\left(n^{\log _{b} a}\right) \\
 T(n)=\Theta\left(n^{\log _{b} a}\right)+O\left(n^{\log _{b} a}\right)=\Theta\left(n^{\log _{b} a}\right)
 \end{array}
  $$
+(2)
+$$
+\begin{array}{l}
+f(n)=\Theta\left(n^{\log _{b} a}\right) \\
+g(n)=\sum_{j=0}^{\log _{b} n-1} a_{j} f\left(n / b^{j}\right) \\
+f\left(n / b^{j}\right)=\Theta\left(\left(\frac{n}{b^{j}}\right)^{\log _{b} a}\right) \\
+c_{1}, c_{2}, n_{0}, \forall n \geq n_{0} \\
+c_{1}\left(\frac{n}{b^{j}}\right)^{l o g_{b} a} \leq f\left(n / b^{j}\right) \leq c_{2}\left(\frac{n}{b^{j}}\right)^{l o g_{b} a} \Rightarrow c_{1} a^{j}\left(\frac{n}{b^{j}}\right)^{l o g_{b} a} \leq a^{j} f\left(n / b^{j}\right) \leq c_{2} a^{j}\left(\frac{n}{b^{j}}\right)^{\log _{b} a} \\
+c_{1} n^{\log _{b} a}\left(\frac{a}{b^{\log _{b} a}}\right)^{j} \leq a^{j} f\left(n / b^{j}\right) \leq c_{2} n^{\log _{b} a}\left(\frac{a}{b^{\log _{b} a}}\right)^{j} \\
+\Rightarrow c_{1} n^{\log _{b} a} \leq a^{j} f\left(n / b^{j}\right) \leq c_{2} n^{\log _{b} a} \\
+\Rightarrow c_{1} n^{\log _{b} a} \lg n \leq g(n) \leq c_{2} n^{\log _{b} a} \lg n \\
+g(n)=\Theta\left(n^{\log _{b} a} \lg n\right)
+\end{array}
+$$
+ 
