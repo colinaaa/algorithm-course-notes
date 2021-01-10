@@ -8,3 +8,15 @@
 	\item 分治思路
 	
 \end{introduction}
+\section{问题引入}
+给定一个长度为 $n$的序列 $N$，求整个序列中第 $k$小的数。
+\section{分治思路}
+称这个问题为$\text { question }(N, k)$，模仿快速排序的做法，在序列中随机选择一个数作为中间标记tag后将
+小于tag数放到tag左边，其余数放到tag右边。
+\begin{figure}[h]
+	\begin{minipage}[t]{1\linewidth}
+		\centering
+		\includegraphics[width=10cm,height=3.5cm]{image/kth1.png}
+		\caption{模仿快速排序}
+	\end{minipage}
+\end{figure}
