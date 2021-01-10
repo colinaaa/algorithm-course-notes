@@ -3,3 +3,19 @@
 	\item 问题引入
 	\item 用分治法解决
 \end{introduction}
+\section{问题引入}
+在线性代数中我们学习过矩阵乘法，已知规模为 $n$ 的矩阵 $A$ 和 $B$，我们可以直接计算行列积算法的复杂度，单次数乘的复杂度我们已知是$ O(1)$每次计算行列积需要进行$n$次乘法，总共需要计算$n^2$次行列积，所以不难得知基于行列积的矩阵乘法复杂度为$O(n^3)$
+如果我们尝试分治策略，结果会怎么样呢?首先我们将矩阵$C = AB$进行二分。
+$$
+A=\left[\begin{array}{ll}
+A_{11} & A_{12} \\
+A_{21} & A_{22}
+\end{array}\right] B=\left[\begin{array}{ll}
+B_{11} & B_{12} \\
+B_{21} & B_{22}
+\end{array}\right] C=\left[\begin{array}{ll}
+C_{11} & C_{12} \\
+C_{21} & C_{22}
+\end{array}\right]
+$$
+
