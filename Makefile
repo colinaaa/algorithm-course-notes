@@ -22,6 +22,7 @@ TEX=\
 	$(SRC)/network-flow-base.tex \
    	$(SRC)/Ln10-MainMaster.tex \
 	$(SRC)/Ln12-Matrixmultiplicatiofdivideandconqueralgorithms.tex \
+	$(SRC)/Ln13-Thekthextremum.tex \
 	
 
 
