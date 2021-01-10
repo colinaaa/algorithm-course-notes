@@ -85,3 +85,23 @@ $$O\left(n^{2}\right)$$
 第一次组内取中时，每组消耗常数时间，共有  $ \frac{n}{5} $  组，因此第一次取中的时 间复杂度为  $ c n \in O(n) $ （ c  为某常数  ) 。  第二次中位数序列取中，实质上等价 于问题 
 $\text { question }\left(N_{m}, \frac{\left|N_{m}\right|}{2}\right)$,
 ($N_{m}$为中位数序列)而  $ \left|N_{m}\right|=\frac{n}{5} $ ,  所以， 可 以写出优化后的算法时间复杂度递推式:
+
+
+$$T(n) \leq T\left(\frac{n}{5}\right)+T\left(\frac{7 n+6}{10}\right)+O(n)$$
+接下来我们将证明
+$$T(n) \in O(n)$$
+首先，根据  T(n)  的定义，  T(n)  是一个单调递增函数。当  n  足够大时，我 们可以对式 进行放缩，得到式
+$$T(n) \leq T\left(\frac{n}{5}\right)+T\left(\frac{3}{4} n\right)+O(n)$$
+根据 $ O(n) $ 的定义，式还 可写成
+$$T(n) \leq T\left(\frac{n}{5}\right)+T\left(\frac{3}{4} n\right)+c n$$
+其中  c  为某常数。接下来我们试图证明
+$$T(n) \leq 20 \mathrm{cn}$$
+我们知道 $ n=1 $ 时有
+$$T(n) \leq 20 \mathrm{cn} \quad(n=1)$$
+假设 $ n \leq k$  时式 也成立，那么当  $n=k+1$  时，有
+$$
+\frac{n}{5} \leq k \\
+\frac{3}{4} n \leq k
+$$
+
+
