@@ -20,3 +20,13 @@
 		\caption{模仿快速排序}
 	\end{minipage}
 \end{figure}
+这样我们得到了两个小一点的序列。为了后文的叙述方便，我们称在  t a g  左 侧的序列为  $N_{l}$,  长度为  $\left|N_{l}\right|$,  在$ \operatorname{tag}$ 右侧的序列为 $N_{r}$,  长度为$  \left|N_{r}\right|$ 。
+到这一步，我们将问题拆解为如下三种情况:
+$$
+\text {question}(N, k)=\left\{\begin{aligned}
+\text {question}\left(N_{l}, k\right) ,&\left|N_{l}\right|>=k \\
+\text {tag} ,&\left|N_{l}\right|=k-1 \\
+\text {question}\left(N_{r}, k-\left|N_{l}\right|-1\right) ,&\left|N_{l}\right|<k-1
+\end{aligned}\right.
+$$
+按照上述方法不断递归下去，直到中间某一步达成 $ \left|N_{l}\right|=k-1$  的条件时, 就得到想要的结果了。
