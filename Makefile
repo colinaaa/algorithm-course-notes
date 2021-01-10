@@ -20,6 +20,9 @@ TEX=\
 	$(SRC)/Ln26-P-NP.tex\
 	$(SRC)/Proof-of-Statute.tex\
 	$(SRC)/network-flow-base.tex \
+   	$(SRC)/Ln10-MainMaster.tex \
+
+
 
 all: book.pdf
 .PHONY: all clean dev clean-all
