@@ -6,3 +6,12 @@
 \end{introduction}
 \section{主定理的内容}
 已知$T(n) = a T(\frac{n}{b}) + f(n)$，其中$a\geq 1, b\geq 1, f(n)$已知，则：
+$$
+\begin{array}{l}  
+  \left\{\begin{matrix} 
+  f(n) = O(n^{\log_{b}{a} - \epsilon} ),~T(n) = \Theta(n^{\log_{b}{a}} )  \\ 
+  f(n) =  \Theta(n^{\log_{b}{a}} ),~T(n) = \Theta(n^{\log_{b}{a}}\log_{}{n} ) \\ 
+  f(n) = \Omega (n^{\log_{b}{a} + \epsilon} ),T(n) = \Theta (f(n))
+\end{matrix}\right.    
+\end{array} 
+$$
