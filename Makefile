@@ -21,6 +21,8 @@ TEX=\
 	$(SRC)/Proof-of-Statute.tex\
 	$(SRC)/network-flow-base.tex \
    	$(SRC)/Ln10-MainMaster.tex \
+	$(SRC)/Ln12-Matrixmultiplicatiofdivideandconqueralgorithms.tex \
+	
 
 
 
